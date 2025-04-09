@@ -4,6 +4,19 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>BaleBot.Net</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Moqavem</Authors>
+    <Company>RavaqeMehr</Company>
+    <Product>BaleBot.Net</Product>
+    <PackRelease>true</PackRelease>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>Bale;Bot;Messenger;BaleBot</PackageTags>
+    <Description>
+      This client library enables working with the Bale Messenger API, allowing developers to easily integrate with the messaging platform. It provides a simple and efficient way to send and receive messages, manage contacts, and perform other operations within the Bale Messenger ecosystem.
+      The library is designed to be user-friendly and efficient, making it easy for developers to get started with the Bale Messenger API. It abstracts away the complexities of the underlying API, allowing developers to focus on building their applications without worrying about the details of the API implementation.
+      Official docs for the API can be found at: https://docs.bale.ai
+    </Description>
   </PropertyGroup>
 
 </Project>
