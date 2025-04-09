@@ -117,3 +117,29 @@ var firstMessageId = message.MessageId;
 // );
 // Console.WriteLine($"Message Sent: {message.MessageId}");
 #endregion
+
+#region Send Document
+message = await bot.SendDocument(
+    env.TestChatId,
+    "https://www.nuget.org/profiles/RavaqeMehr/avatar?imageSize=512",
+    "send by url!",
+    firstMessageId
+);
+Console.WriteLine($"Message Sent: {message.MessageId}");
+
+message = await bot.SendDocument(
+    env.TestChatId,
+    "1562583495:6023008542197686018:1:e854097b7f467a4695109c46edfc75cd",
+    "send by fileId!",
+    firstMessageId
+);
+Console.WriteLine($"Message Sent: {message.MessageId}");
+
+message = await bot.SendDocument(
+    env.TestChatId,
+    new FileInfo(@"assets\sekke.jpg"),
+    "uploaded by local file!",
+    firstMessageId
+);
+Console.WriteLine($"Message Sent: {message.MessageId}");
+#endregion
