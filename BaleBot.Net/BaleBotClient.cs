@@ -11,7 +11,8 @@ public class BaleBotClient(string token)
     private readonly HttpClient httpClient = new HttpClient
     {
         BaseAddress = new Uri($"https://tapi.bale.ai/bot{token}/"),
-        DefaultRequestHeaders = { { "User-Agent", "BaleBot.Net" } }
+        DefaultRequestHeaders = { { "User-Agent", "BaleBot.Net" } },
+        Timeout = TimeSpan.FromSeconds(20)
     };
 
     public static readonly JsonSerializerOptions jsonOption =
@@ -31,7 +32,7 @@ public class BaleBotClient(string token)
     {
 #if DEBUG
         Console.WriteLine("----------------");
-        Console.WriteLine(SerializeToJson(request));
+        Console.WriteLine($"Request [{request.RequestUri}] :");
 #endif
 
         var response = await httpClient.SendAsync(request);

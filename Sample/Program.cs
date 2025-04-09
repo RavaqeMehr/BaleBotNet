@@ -14,11 +14,12 @@ Console.WriteLine($"Hello, BaleBot.Net! I'm @{me.Username} !");
 
 var message = await bot.SendMessage(env.TestChatId, "Hello, World!");
 Console.WriteLine($"Message Sent: {message.MessageId}");
+var firstMessageId = message.MessageId;
 
 message = await bot.SendMessage(
     env.TestChatId,
     "Hello, World! Reply with InlineKeyboardMarkup",
-    message.MessageId,
+    firstMessageId,
     new InlineKeyboardMarkup
     {
         InlineKeyboard =
@@ -35,7 +36,7 @@ Console.WriteLine($"Message Sent: {message.MessageId}");
 message = await bot.SendMessage(
     env.TestChatId,
     "Hello, World! Reply with ReplyKeyboardMarkup",
-    message.MessageId,
+    firstMessageId,
     new ReplyKeyboardMarkup
     {
         Keyboard =
@@ -44,4 +45,10 @@ message = await bot.SendMessage(
         ]
     }
 );
+Console.WriteLine($"Message Sent: {message.MessageId}");
+
+message = await bot.ForwardMessage(env.TestChatId, env.TestChatId, firstMessageId);
+Console.WriteLine($"Message Sent: {message.MessageId}");
+
+message = await bot.SendMessage(env.TestChatId, "Clean Reply Markup!");
 Console.WriteLine($"Message Sent: {message.MessageId}");

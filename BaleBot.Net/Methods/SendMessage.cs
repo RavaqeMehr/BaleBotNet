@@ -37,7 +37,7 @@ public static partial class Methods
                     chat_id = chatId,
                     text,
                     reply_to_message_id = replyToMessageId,
-                    reply_markup = replyMarkup
+                    reply_markup = replyMarkup ?? "{\"keyboard\":\"[[]]\"}"
                 }
             )
         };
