@@ -16,6 +16,7 @@ message = await bot.SendMessage(env.TestChatId, $"Hi! I'm @{me.Username} !");
 Console.WriteLine($"Message Sent: {message.MessageId}");
 var firstMessageId = message.MessageId;
 
+#region Send, Edit & Delete Message
 // message = await bot.SendMessage(
 //     env.TestChatId,
 //     "Hello, World! Reply with InlineKeyboardMarkup",
@@ -61,7 +62,9 @@ var firstMessageId = message.MessageId;
 
 // var deleted = await bot.DeleteMessage(env.TestChatId, firstMessageId);
 // Console.WriteLine($"Message Deleted: {deleted}");
+#endregion
 
+#region Send Photo
 // message = await bot.SendPhoto(
 //     env.TestChatId,
 //     "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/800px-PNG_transparency_demonstration_1.png",
@@ -80,8 +83,37 @@ var firstMessageId = message.MessageId;
 
 // message = await bot.SendPhoto(
 //     env.TestChatId,
-//     new FileInfo("bale.webp"),
-//     "uploaded by local file!",
+//     new FileInfo(@"assets\bale.webp"),
+//     fileName: "بله.webp",
+//     caption: "uploaded by local file!",
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+#endregion
+
+#region Send Audio
+// message = await bot.SendAudio(
+//     env.TestChatId,
+//     "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+//     "send by url!",
 //     firstMessageId
 // );
 // Console.WriteLine($"Message Sent: {message.MessageId}");
+
+// message = await bot.SendAudio(
+//     env.TestChatId,
+//     "1562583495:6023008542197686018:1:e854097b7f467a4695109c46edfc75cd",
+//     "send by fileId!",
+//     firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+
+// message = await bot.SendAudio(
+//     env.TestChatId,
+//     new FileInfo(@"assets\esfahani.mp3"),
+//     fileName: "اصفهانی.mp3",
+//     caption: "uploaded by local file!",
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+#endregion

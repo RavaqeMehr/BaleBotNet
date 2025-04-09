@@ -12,7 +12,7 @@ public class BaleBotClient(string token)
     {
         BaseAddress = new Uri($"https://tapi.bale.ai/bot{token}/"),
         DefaultRequestHeaders = { { "User-Agent", "BaleBot.Net" } },
-        Timeout = TimeSpan.FromSeconds(20)
+        Timeout = TimeSpan.FromSeconds(60)
     };
 
     public static readonly JsonSerializerOptions jsonOption =

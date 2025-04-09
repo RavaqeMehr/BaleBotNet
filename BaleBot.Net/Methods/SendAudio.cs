@@ -6,7 +6,7 @@ namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
-    public static async Task<Message> SendPhoto(
+    public static async Task<Message> SendAudio(
         this BaleBotClient bot,
         long chatId,
         string fileIdOrUrl,
@@ -15,13 +15,13 @@ public static partial class Methods
         IReplyMarkup? replyMarkup = null
     )
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "sendPhoto")
+        var request = new HttpRequestMessage(HttpMethod.Post, "sendAudio")
         {
             Content = JsonContent.Create(
                 new
                 {
                     chat_id = chatId,
-                    photo = fileIdOrUrl,
+                    audio = fileIdOrUrl,
                     caption,
                     reply_to_message_id = replyToMessageId,
                     reply_markup = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
@@ -32,7 +32,7 @@ public static partial class Methods
         return await bot.SendRequest<Message>(request);
     }
 
-    public static async Task<Message> SendPhoto(
+    public static async Task<Message> SendAudio(
         this BaleBotClient bot,
         long chatId,
         FileInfo fileInfo,
@@ -44,12 +44,12 @@ public static partial class Methods
     {
         using FileStream fileStream = new(fileInfo.FullName, FileMode.Open, FileAccess.Read);
         using var fileContent = new StreamContent(fileStream);
-        fileContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+        fileContent.Headers.ContentType = new MediaTypeHeaderValue("audio/mp3");
 
         using var content = new MultipartFormDataContent
         {
             { new StringContent(chatId.ToString()), "chat_id" },
-            { fileContent, "photo", fileName ?? fileInfo.Name }
+            { fileContent, "audio", fileName ?? fileInfo.Name }
         };
 
         if (!string.IsNullOrEmpty(caption))
@@ -70,7 +70,7 @@ public static partial class Methods
             );
         }
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, "sendPhoto")
+        using var request = new HttpRequestMessage(HttpMethod.Post, "sendAudio")
         {
             Content = content
         };
