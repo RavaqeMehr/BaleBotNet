@@ -52,3 +52,6 @@ Console.WriteLine($"Message Sent: {message.MessageId}");
 
 message = await bot.SendMessage(env.TestChatId, "Clean Reply Markup!");
 Console.WriteLine($"Message Sent: {message.MessageId}");
+
+message = await bot.CopyMessage(message.Chat.Id, message.Chat.Id, message.MessageId);
+Console.WriteLine($"Message Sent: {message.MessageId}");
