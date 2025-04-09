@@ -5,22 +5,22 @@ namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
-    public static async Task<Message> SendMessage(
+    public static async Task<Message> EditMessage(
         this BaleBotClient bot,
         long chatId,
+        long messageId,
         string text,
-        long? replyToMessageId = null,
         IReplyMarkup? replyMarkup = null
     )
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "sendMessage")
+        var request = new HttpRequestMessage(HttpMethod.Post, "editMessageText")
         {
             Content = JsonContent.Create(
                 new
                 {
                     chat_id = chatId,
+                    message_id = messageId,
                     text,
-                    reply_to_message_id = replyToMessageId,
                     reply_markup = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
                 }
             )

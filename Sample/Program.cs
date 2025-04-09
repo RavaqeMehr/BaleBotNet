@@ -56,3 +56,7 @@ var firstMessageId = message.MessageId;
 
 // message = await bot.CopyMessage(message.Chat.Id, message.Chat.Id, message.MessageId);
 // Console.WriteLine($"Message Sent: {message.MessageId}");
+
+
+message = await bot.EditMessage(env.TestChatId, firstMessageId, "Hello, World! Edited!");
+Console.WriteLine($"Message Edited: {message.MessageId}");
