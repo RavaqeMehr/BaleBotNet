@@ -57,6 +57,9 @@ var firstMessageId = message.MessageId;
 // message = await bot.CopyMessage(message.Chat.Id, message.Chat.Id, message.MessageId);
 // Console.WriteLine($"Message Sent: {message.MessageId}");
 
+// message = await bot.EditMessage(env.TestChatId, firstMessageId, "Hello, World! Edited!");
+// Console.WriteLine($"Message Edited: {message.MessageId}");
 
-message = await bot.EditMessage(env.TestChatId, firstMessageId, "Hello, World! Edited!");
-Console.WriteLine($"Message Edited: {message.MessageId}");
+
+var deleted = await bot.DeleteMessage(env.TestChatId, firstMessageId);
+Console.WriteLine($"Message Deleted: {deleted}");
