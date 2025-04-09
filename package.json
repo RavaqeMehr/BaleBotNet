@@ -1,0 +1,19 @@
+{
+  "name": "bale-bot-net",
+  "version": "1.0.0",
+  "private": true,
+  "resolutions": {
+    "nth-check": "^3.0.1"
+  },
+  "scripts": {
+    "sample": "dotnet run --project Sample\\Sample.csproj",
+    "build-8": "dotnet build BaleBot.Net\\BaleBot.Net.csproj -c Release -f net8.0",
+    "build-9": "dotnet build BaleBot.Net\\BaleBot.Net.csproj -c Release -f net9.0",
+    "build": "yarn build-8 && yarn build-9",
+    "pack": "yarn build && dotnet pack BaleBot.Net\\BaleBot.Net.csproj",
+    "nuget": "dotnet nuget push BaleBot.Net\\bin\\Release\\BaleBot.Net.*.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate"
+  },
+  "dependencies": {
+    "debounce": "^2.2.0"
+  }
+}
