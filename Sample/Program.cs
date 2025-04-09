@@ -11,47 +11,48 @@ var bot = new BaleBotClient(env.Token);
 
 var me = await bot.GetMe();
 Console.WriteLine($"Hello, BaleBot.Net! I'm @{me.Username} !");
+Message message;
 
-var message = await bot.SendMessage(env.TestChatId, "Hello, World!");
+message = await bot.SendMessage(env.TestChatId, "Hello, World!");
 Console.WriteLine($"Message Sent: {message.MessageId}");
 var firstMessageId = message.MessageId;
 
-message = await bot.SendMessage(
-    env.TestChatId,
-    "Hello, World! Reply with InlineKeyboardMarkup",
-    firstMessageId,
-    new InlineKeyboardMarkup
-    {
-        InlineKeyboard =
-        [
-            [
-                new() { Text = "Text1", CallbackData = "test1" },
-                new() { Text = "Text2", CallbackData = "test2" }
-            ]
-        ]
-    }
-);
-Console.WriteLine($"Message Sent: {message.MessageId}");
+// message = await bot.SendMessage(
+//     env.TestChatId,
+//     "Hello, World! Reply with InlineKeyboardMarkup",
+//     firstMessageId,
+//     new InlineKeyboardMarkup
+//     {
+//         InlineKeyboard =
+//         [
+//             [
+//                 new() { Text = "Text1", CallbackData = "test1" },
+//                 new() { Text = "Text2", CallbackData = "test2" }
+//             ]
+//         ]
+//     }
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
 
-message = await bot.SendMessage(
-    env.TestChatId,
-    "Hello, World! Reply with ReplyKeyboardMarkup",
-    firstMessageId,
-    new ReplyKeyboardMarkup
-    {
-        Keyboard =
-        [
-            [new() { Text = "Text1" }, new() { Text = "Text2" }]
-        ]
-    }
-);
-Console.WriteLine($"Message Sent: {message.MessageId}");
+// message = await bot.SendMessage(
+//     env.TestChatId,
+//     "Hello, World! Reply with ReplyKeyboardMarkup",
+//     firstMessageId,
+//     new ReplyKeyboardMarkup
+//     {
+//         Keyboard =
+//         [
+//             [new() { Text = "Text1" }, new() { Text = "Text2" }]
+//         ]
+//     }
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
 
-message = await bot.ForwardMessage(env.TestChatId, env.TestChatId, firstMessageId);
-Console.WriteLine($"Message Sent: {message.MessageId}");
+// message = await bot.ForwardMessage(env.TestChatId, env.TestChatId, firstMessageId);
+// Console.WriteLine($"Message Sent: {message.MessageId}");
 
-message = await bot.SendMessage(env.TestChatId, "Clean Reply Markup!");
-Console.WriteLine($"Message Sent: {message.MessageId}");
+// message = await bot.SendMessage(env.TestChatId, "Clean Reply Markup!");
+// Console.WriteLine($"Message Sent: {message.MessageId}");
 
-message = await bot.CopyMessage(message.Chat.Id, message.Chat.Id, message.MessageId);
-Console.WriteLine($"Message Sent: {message.MessageId}");
+// message = await bot.CopyMessage(message.Chat.Id, message.Chat.Id, message.MessageId);
+// Console.WriteLine($"Message Sent: {message.MessageId}");
