@@ -10,10 +10,9 @@ var env =
 var bot = new BaleBotClient(env.Token);
 
 var me = await bot.GetMe();
-Console.WriteLine($"Hello, BaleBot.Net! I'm @{me.Username} !");
 Message message;
 
-message = await bot.SendMessage(env.TestChatId, "Hello, World!");
+message = await bot.SendMessage(env.TestChatId, $"Hi! I'm @{me.Username} !");
 Console.WriteLine($"Message Sent: {message.MessageId}");
 var firstMessageId = message.MessageId;
 
@@ -60,6 +59,29 @@ var firstMessageId = message.MessageId;
 // message = await bot.EditMessage(env.TestChatId, firstMessageId, "Hello, World! Edited!");
 // Console.WriteLine($"Message Edited: {message.MessageId}");
 
+// var deleted = await bot.DeleteMessage(env.TestChatId, firstMessageId);
+// Console.WriteLine($"Message Deleted: {deleted}");
 
-var deleted = await bot.DeleteMessage(env.TestChatId, firstMessageId);
-Console.WriteLine($"Message Deleted: {deleted}");
+// message = await bot.SendPhoto(
+//     env.TestChatId,
+//     "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/800px-PNG_transparency_demonstration_1.png",
+//     "send by url!",
+//     firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+
+// message = await bot.SendPhoto(
+//     env.TestChatId,
+//     "948302853:-2130208011622211839:1:a6be9173b0d1d688d7c2f54fcdd42a151a9ec6f7595b78a8",
+//     "send by fileId!",
+//     firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+
+// message = await bot.SendPhoto(
+//     env.TestChatId,
+//     new FileInfo("bale.webp"),
+//     "uploaded by local file!",
+//     firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
