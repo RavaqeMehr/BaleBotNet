@@ -1,12 +1,47 @@
 ﻿using System.Text.Json;
 using BaleBot.Net;
 using BaleBot.Net.Methods;
+using BaleBot.Net.Types;
 
 var env =
-    JsonSerializer.Deserialize<Env>(await File.ReadAllTextAsync("env.json"))
+    JsonSerializer.Deserialize<Env>(await System.IO.File.ReadAllTextAsync("env.json"))
     ?? throw new Exception("Failed to load env.json file.");
 
-var bot = new BaleBotClient(env.Token + "12345");
-var me = await bot.GetMe();
+var bot = new BaleBotClient(env.Token);
 
-Console.WriteLine($"Hello, World! I'm @{me.Username} !");
+var me = await bot.GetMe();
+Console.WriteLine($"Hello, BaleBot.Net! I'm @{me.Username} !");
+
+var message = await bot.SendMessage(env.TestChatId, "Hello, World!");
+Console.WriteLine($"Message Sent: {message.MessageId}");
+
+message = await bot.SendMessage(
+    env.TestChatId,
+    "Hello, World! Reply with InlineKeyboardMarkup",
+    message.MessageId,
+    new InlineKeyboardMarkup
+    {
+        InlineKeyboard =
+        [
+            [
+                new() { Text = "Text1", CallbackData = "test1" },
+                new() { Text = "Text2", CallbackData = "test2" }
+            ]
+        ]
+    }
+);
+Console.WriteLine($"Message Sent: {message.MessageId}");
+
+message = await bot.SendMessage(
+    env.TestChatId,
+    "Hello, World! Reply with ReplyKeyboardMarkup",
+    message.MessageId,
+    new ReplyKeyboardMarkup
+    {
+        Keyboard =
+        [
+            [new() { Text = "Text1" }, new() { Text = "Text2" }]
+        ]
+    }
+);
+Console.WriteLine($"Message Sent: {message.MessageId}");

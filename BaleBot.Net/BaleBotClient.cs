@@ -10,18 +10,30 @@ public class BaleBotClient(string token)
 
     private readonly HttpClient httpClient = new HttpClient
     {
-        BaseAddress = new Uri($"https://tapi.bale.ai/bot{token}/")
+        BaseAddress = new Uri($"https://tapi.bale.ai/bot{token}/"),
+        DefaultRequestHeaders = { { "User-Agent", "BaleBot.Net" } }
     };
 
-    public readonly JsonSerializerOptions jsonOption =
+    public static readonly JsonSerializerOptions jsonOption =
         new(JsonSerializerOptions.Default)
         {
             PropertyNameCaseInsensitive = true,
-            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
+            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+            DefaultIgnoreCondition = System
+                .Text
+                .Json
+                .Serialization
+                .JsonIgnoreCondition
+                .WhenWritingNull
         };
 
     public async Task<T> SendRequest<T>(HttpRequestMessage request)
     {
+#if DEBUG
+        Console.WriteLine("----------------");
+        Console.WriteLine(SerializeToJson(request));
+#endif
+
         var response = await httpClient.SendAsync(request);
         Response<T> result = (await response.Content.ReadFromJsonAsync<Response<T>>(jsonOption))!;
 
@@ -32,6 +44,18 @@ public class BaleBotClient(string token)
             );
         }
 
+#if DEBUG
+        Console.WriteLine(SerializeToJson(result));
+        Console.WriteLine("----------------");
+#endif
+
         return result.Result!;
+    }
+
+    public static string? SerializeToJson<T>(T? obj)
+    {
+        if (obj == null)
+            return null;
+        return JsonSerializer.Serialize(obj, jsonOption);
     }
 }

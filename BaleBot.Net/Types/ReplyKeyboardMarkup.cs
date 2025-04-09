@@ -1,6 +1,13 @@
 namespace BaleBot.Net.Types;
 
-public class ReplyKeyboardMarkup
+public interface IReplyMarkup
+{
+    string? Serialize();
+}
+
+public class ReplyKeyboardMarkup : IReplyMarkup
 {
     public KeyboardButton[][] Keyboard { get; set; } = default!;
+
+    public string? Serialize() => BaleBotClient.SerializeToJson(this);
 }
