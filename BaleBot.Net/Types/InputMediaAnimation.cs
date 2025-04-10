@@ -1,23 +1,26 @@
 namespace BaleBot.Net.Types;
 
-public class InputMediaAnimation : InputMediaDocument
+public class InputMediaAnimationForUpload : InputMediaDocumentForUpload
 {
-    public InputMediaAnimation(
-        string fileIdOrUrl,
-        string? thumbnailFileIdOrUrl = null,
-        string? caption = null
-    )
-        : base(fileIdOrUrl, thumbnailFileIdOrUrl, caption)
-    {
-        Type = "animation";
-    }
-
-    public InputMediaAnimation(
+    public InputMediaAnimationForUpload(
         FileInfo file,
         FileInfo? thumbnailFile = null,
         string? caption = null
     )
         : base(file, thumbnailFile, caption)
+    {
+        Type = "animation";
+    }
+}
+
+public class InputMediaAnimationForFileIdOrUrl : InputMediaDocumentForFileIdOrUrl
+{
+    public InputMediaAnimationForFileIdOrUrl(
+        string fileIdOrUrl,
+        string? thumbnailFileIdOrUrl = null,
+        string? caption = null
+    )
+        : base(fileIdOrUrl, thumbnailFileIdOrUrl, caption)
     {
         Type = "animation";
     }

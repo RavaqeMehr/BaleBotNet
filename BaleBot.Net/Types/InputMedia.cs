@@ -1,6 +1,6 @@
 namespace BaleBot.Net.Types;
 
-public abstract class InputMedia
+public abstract class InputMediaForUpload
 {
     public string Type { get; set; } = default!;
     public FileInfo? FileInfo { get; set; }
@@ -15,7 +15,20 @@ public abstract class InputMedia
     public string? Title { get; set; }
 }
 
-public class InputMediaMetaData
+public abstract class InputMediaForFileIdOrUrl
+{
+    public string Type { get; set; } = default!;
+    public string Media { get; set; } = default!;
+    public string? Caption { get; set; }
+
+    // For types: video, animation, audio, document
+    public string? Thumbnail { get; set; }
+
+    // Just Audi Type
+    public string? Title { get; set; }
+}
+
+public class InputMediaForUploadMetaData
 {
     public string Type { get; set; } = default!;
     public string Media { get; set; } = default!;
@@ -28,10 +41,10 @@ public static class InputMediaExtensions
 {
     public static (
         MultipartFormDataContent multipartFormDataContent,
-        InputMediaMetaData[] metaDatas
-    ) GetMultipartFormDataContentAndMetaDatas(this InputMedia[] inputMedias)
+        InputMediaForUploadMetaData[] metaDatas
+    ) GetMultipartFormDataContentAndMetaDatas(this InputMediaForUpload[] inputMedias)
     {
-        var metaDatas = new List<InputMediaMetaData>();
+        var metaDatas = new List<InputMediaForUploadMetaData>();
 
         MultipartFormDataContent content = new();
         foreach (var item in inputMedias.Index())
@@ -39,7 +52,7 @@ public static class InputMediaExtensions
             var inputMedia = item.Item;
             var inputMediaNumber = item.Index + 1;
 
-            InputMediaMetaData itemMetaData = new() { Type = inputMedia.Type };
+            InputMediaForUploadMetaData itemMetaData = new() { Type = inputMedia.Type };
             if (inputMedia.Caption is string caption && caption.Length > 0)
             {
                 itemMetaData.Caption = caption;

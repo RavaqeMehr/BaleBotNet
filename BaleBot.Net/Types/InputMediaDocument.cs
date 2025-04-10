@@ -1,8 +1,23 @@
 namespace BaleBot.Net.Types;
 
-public class InputMediaDocument : InputMedia
+public class InputMediaDocumentForUpload : InputMediaForUpload
 {
-    public InputMediaDocument(
+    public InputMediaDocumentForUpload(
+        FileInfo file,
+        FileInfo? thumbnailFile = null,
+        string? caption = null
+    )
+    {
+        Type = "document";
+        Caption = caption;
+        FileInfo = file;
+        ThumbnailFileInfo = thumbnailFile;
+    }
+}
+
+public class InputMediaDocumentForFileIdOrUrl : InputMediaForFileIdOrUrl
+{
+    public InputMediaDocumentForFileIdOrUrl(
         string fileIdOrUrl,
         string? thumbnailFileIdOrUrl = null,
         string? caption = null
@@ -12,13 +27,5 @@ public class InputMediaDocument : InputMedia
         Caption = caption;
         Media = fileIdOrUrl;
         Thumbnail = thumbnailFileIdOrUrl;
-    }
-
-    public InputMediaDocument(FileInfo file, FileInfo? thumbnailFile = null, string? caption = null)
-    {
-        Type = "document";
-        Caption = caption;
-        FileInfo = file;
-        ThumbnailFileInfo = thumbnailFile;
     }
 }
