@@ -119,30 +119,30 @@ var firstMessageId = message.MessageId;
 #endregion
 
 #region Send Video
-message = await bot.SendVideo(
-    env.TestChatId,
-    "https://download.samplelib.com/mp4/sample-5s.mp4",
-    "send by url!",
-    firstMessageId
-);
-Console.WriteLine($"Message Sent: {message.MessageId}");
+// message = await bot.SendVideo(
+//     env.TestChatId,
+//     "https://download.samplelib.com/mp4/sample-5s.mp4",
+//     "send by url!",
+//     firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
 
-message = await bot.SendVideo(
-    env.TestChatId,
-    "6313375308:-345340924282003710:1:ae6f9a208f138674e437abb5ef79a91267396412d657974b1c6a2f3cfa2833b7",
-    "send by fileId!",
-    firstMessageId
-);
-Console.WriteLine($"Message Sent: {message.MessageId}");
+// message = await bot.SendVideo(
+//     env.TestChatId,
+//     "6313375308:-345340924282003710:1:ae6f9a208f138674e437abb5ef79a91267396412d657974b1c6a2f3cfa2833b7",
+//     "send by fileId!",
+//     firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
 
-message = await bot.SendVideo(
-    env.TestChatId,
-    new FileInfo(@"assets\video.mp4"),
-    fileName: "earth.mp4",
-    caption: "uploaded by local file!",
-    replyToMessageId: firstMessageId
-);
-Console.WriteLine($"Message Sent: {message.MessageId}");
+// message = await bot.SendVideo(
+//     env.TestChatId,
+//     new FileInfo(@"assets\video.mp4"),
+//     fileName: "earth.mp4",
+//     caption: "uploaded by local file!",
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
 #endregion
 
 #region Send Document
@@ -166,6 +166,61 @@ Console.WriteLine($"Message Sent: {message.MessageId}");
 //     env.TestChatId,
 //     new FileInfo(@"assets\sekke.jpg"),
 //     fileName: "سکه.jpg",
+//     caption: "uploaded by local file!",
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+#endregion
+
+#region Send Animation # HAS ERROR
+// message = await bot.SendAnimation(
+//     env.TestChatId,
+//     "https://novawebbusiness.com/wp-content/uploads/2022/12/Wow-gif.gif",
+//     "send by url!",
+//     firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+
+// message = await bot.SendAnimation(
+//     env.TestChatId,
+//     "1559504661:-2250243873464180992:0:35157a1b7a3906da1a9ec6f7595b78a8",
+//     "send by fileId!",
+//     firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+
+// message = await bot.SendAnimation(
+//     env.TestChatId,
+//     new FileInfo(@"assets\cat.gif"),
+//     fileName: "گربه.gif",
+//     caption: "uploaded by local file!",
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+#endregion
+
+
+#region Send Voice
+// message = await bot.SendVoice(
+//     env.TestChatId,
+//     "https://getsamplefiles.com/download/ogg/sample-1.ogg",
+//     "send by url!",
+//     firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+
+// message = await bot.SendVoice(
+//     env.TestChatId,
+//     "948302853:7993782975905799938:1:13cb8cee8a050f7fe83addac564f918d5c737303c407d73a540b672004186277bc72b9472207ef6e",
+//     "send by fileId!",
+//     firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+
+// message = await bot.SendVoice(
+//     env.TestChatId,
+//     new FileInfo(@"assets\voice.opus"),
+//     fileName: "سلام.opus",
 //     caption: "uploaded by local file!",
 //     replyToMessageId: firstMessageId
 // );

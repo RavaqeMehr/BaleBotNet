@@ -11,7 +11,9 @@ public static partial class Methods
         SendPhoto,
         SendAudio,
         SendDocument,
-        SendVideo
+        SendVideo,
+        SendAnimation,
+        SendVoice
     }
 
     private static string GetMethodUrl(this SendMethod sendMethod) =>
@@ -20,8 +22,9 @@ public static partial class Methods
             SendMethod.SendPhoto => "sendPhoto",
             SendMethod.SendAudio => "sendAudio",
             SendMethod.SendVideo => "sendVideo",
-            SendMethod.SendDocument => "sendDocument",
-            _ => throw new ArgumentOutOfRangeException(nameof(sendMethod), sendMethod, null)
+            SendMethod.SendAnimation => "sendAnimation",
+            SendMethod.SendVoice => "sendVoice",
+            _ => "sendDocument"
         };
 
     private static MediaTypeHeaderValue GetContentType(this SendMethod sendMethod) =>
@@ -31,8 +34,9 @@ public static partial class Methods
                 SendMethod.SendPhoto => "image/jpeg",
                 SendMethod.SendAudio => "audio/mpeg",
                 SendMethod.SendVideo => "video/mp4",
-                SendMethod.SendDocument => "application/octet-stream",
-                _ => throw new ArgumentOutOfRangeException(nameof(sendMethod), sendMethod, null)
+                SendMethod.SendAnimation => "image/gif",
+                SendMethod.SendVoice => "audio/ogg",
+                _ => "application/octet-stream"
             }
         );
 
@@ -42,8 +46,9 @@ public static partial class Methods
             SendMethod.SendPhoto => "photo",
             SendMethod.SendAudio => "audio",
             SendMethod.SendVideo => "video",
-            SendMethod.SendDocument => "document",
-            _ => throw new ArgumentOutOfRangeException(nameof(sendMethod), sendMethod, null)
+            SendMethod.SendAnimation => "animation",
+            SendMethod.SendVoice => "voice",
+            _ => "document"
         };
 
     private static async Task<Message> SendFile(
