@@ -466,3 +466,8 @@ var bot = new BaleBotClient(env.Token);
 
 
 #endregion
+
+#region Webhook
+// var webhookInfo = await bot.GetWebhookInfo();
+// Console.WriteLine($"Webhook Url: {webhookInfo.Url}");
+#endregion
