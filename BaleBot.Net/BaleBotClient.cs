@@ -58,6 +58,11 @@ public class BaleBotClient(string token, int timeout = 60)
         return result.Result!;
     }
 
+    public async Task<Stream> StreamDownloader(string fileUrl)
+    {
+        return await httpClient.GetStreamAsync(fileUrl);
+    }
+
     public static string? SerializeToJson<T>(T? obj)
     {
         if (obj == null)

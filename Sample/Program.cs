@@ -383,3 +383,25 @@ var firstMessageId = message.MessageId;
 #endregion
 
 #endregion
+
+
+#region Download File
+string fileId = "948302853:-2130208011622211839:1:a6be9173b0d1d688d7c2f54fcdd42a151a9ec6f7595b78a8";
+var file = await bot.GetFile(fileId);
+if (await bot.Download(file, @"assets\downloaded1.tmp"))
+{
+    Console.WriteLine($"File Downloaded: {file.FileId}");
+}
+else
+{
+    Console.WriteLine($"File Not Found: {file.FileId}");
+}
+if (await bot.Download(fileId, @"assets\downloaded2.tmp"))
+{
+    Console.WriteLine($"File Downloaded: {file.FileId}");
+}
+else
+{
+    Console.WriteLine($"File Not Found: {file.FileId}");
+}
+#endregion

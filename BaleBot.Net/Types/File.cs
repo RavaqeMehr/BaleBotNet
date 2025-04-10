@@ -7,6 +7,8 @@ public class File
     public long FileSize { get; set; }
     public string? FilePath { get; set; }
 
-    public string? FileUrl(BaleBotClient bot) =>
-        FilePath == null ? null : $"https://tapi.bale.ai/file/{bot.Token}/{FilePath}";
+    public string FileUrl(BaleBotClient bot) => GetFileUrl(bot, FileId);
+
+    public static String GetFileUrl(BaleBotClient bot, string fileId) =>
+        $"https://tapi.bale.ai/file/{bot.Token}/{fileId}";
 }
