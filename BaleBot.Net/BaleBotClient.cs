@@ -31,14 +31,22 @@ public class BaleBotClient(string token, int timeout = 60)
     public async Task<T> SendRequest<T>(HttpRequestMessage request)
     {
 #if DEBUG
-        Console.WriteLine("----------------");
-        Console.WriteLine($"Request [{request.RequestUri}] :");
+        Console.WriteLine($"Request [{request.RequestUri}] : ----------------");
         Console.WriteLine(
             request.Content != null ? await request.Content.ReadAsStringAsync() : "No Content"
         );
 #endif
+
         var response = await httpClient.SendAsync(request);
-        Response<T> result = (await response.Content.ReadFromJsonAsync<Response<T>>(jsonOption))!;
+        var responseString = await response.Content.ReadAsStringAsync();
+
+#if DEBUG
+        Console.WriteLine($"Response : ----------------");
+        Console.WriteLine(responseString);
+        Console.WriteLine("----------------");
+#endif
+
+        Response<T> result = DeserializeFromJson<Response<T>>(responseString)!; //(await response.Content.ReadFromJsonAsync<Response<T>>(jsonOption))!;
 
         if (!response.IsSuccessStatusCode)
         {
@@ -46,11 +54,6 @@ public class BaleBotClient(string token, int timeout = 60)
                 $"SendRequest [{request.RequestUri!.LocalPath.Replace(Token, "").Replace("//", "/").Replace("/bot", "")}] Error: {result.Description} ({result.ErrorCode})"
             );
         }
-
-#if DEBUG
-        Console.WriteLine(SerializeToJson(result));
-        Console.WriteLine("----------------");
-#endif
 
         return result.Result!;
     }
@@ -60,5 +63,12 @@ public class BaleBotClient(string token, int timeout = 60)
         if (obj == null)
             return null;
         return JsonSerializer.Serialize(obj, jsonOption);
+    }
+
+    public static T? DeserializeFromJson<T>(string? json)
+    {
+        if (json == null)
+            return default;
+        return JsonSerializer.Deserialize<T>(json, jsonOption);
     }
 }
