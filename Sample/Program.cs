@@ -172,8 +172,8 @@ var firstMessageId = message.MessageId;
 // Console.WriteLine($"Message Sent: {message.MessageId}");
 #endregion
 
-// Has Errors
 #region Send Animation
+// Has Errors
 // message = await bot.SendAnimation(
 //     env.TestChatId,
 //     "https://novawebbusiness.com/wp-content/uploads/2022/12/Wow-gif.gif",
@@ -182,6 +182,7 @@ var firstMessageId = message.MessageId;
 // );
 // Console.WriteLine($"Message Sent: {message.MessageId}");
 
+// Has Errors
 // message = await bot.SendAnimation(
 //     env.TestChatId,
 //     "1559504661:-2250243873464180992:0:35157a1b7a3906da1a9ec6f7595b78a8",
@@ -275,6 +276,7 @@ var firstMessageId = message.MessageId;
 #region Send MediaGroup
 // Message[] album;
 
+#region Photo
 // album = await bot.SendMediaGroup(
 //     env.TestChatId,
 //     [
@@ -310,4 +312,74 @@ var firstMessageId = message.MessageId;
 //     replyToMessageId: firstMessageId
 // );
 // Console.WriteLine($"Album Sent: {album.Length}");
+#endregion
+
+#region Animation
+// album = await bot.SendMediaGroup(
+//     env.TestChatId,
+//     [
+//         new InputMediaAnimationForFileIdOrUrl(
+//             "1559504661:-2250243873464180992:0:35157a1b7a3906da1a9ec6f7595b78a8",
+//             caption: "send by fileId!"
+//         ),
+//         new InputMediaAnimationForFileIdOrUrl(
+//             "https://novawebbusiness.com/wp-content/uploads/2022/12/Wow-gif.gif",
+//             caption: "send by url!"
+//         )
+//     ],
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Album Sent: {album.Length}");
+
+// album = await bot.SendMediaGroup(
+//     env.TestChatId,
+//     [
+//         new InputMediaAnimationForUpload(
+//             new FileInfo(@"assets\cat.gif"),
+//             caption: "uploaded1 by local file!"
+//         ),
+//         new InputMediaAnimationForUpload(
+//             new FileInfo(@"assets\cat.gif"),
+//             caption: "uploaded3 by local file!"
+//         )
+//     ],
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Album Sent: {album.Length}");
+#endregion
+
+#region Video
+// album = await bot.SendMediaGroup(
+//     env.TestChatId,
+//     [
+//         new InputMediaVideoForFileIdOrUrl(
+//             "6313375308:-345340924282003710:1:ae6f9a208f138674e437abb5ef79a91267396412d657974b1c6a2f3cfa2833b7",
+//             caption: "send by fileId!"
+//         ),
+//         new InputMediaVideoForFileIdOrUrl(
+//             "https://download.samplelib.com/mp4/sample-5s.mp4",
+//             caption: "send by url!"
+//         )
+//     ],
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Album Sent: {album.Length}");
+
+// album = await bot.SendMediaGroup(
+//     env.TestChatId,
+//     [
+//         new InputMediaVideoForUpload(
+//             new FileInfo(@"assets\video.mp4"),
+//             caption: "uploaded1 by local file!"
+//         ),
+//         new InputMediaVideoForUpload(
+//             new FileInfo(@"assets\video.mp4"),
+//             caption: "uploaded2 by local file!"
+//         )
+//     ],
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Album Sent: {album.Length}");
+#endregion
+
 #endregion

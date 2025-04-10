@@ -4,6 +4,8 @@ namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
+    // Commented because has server error
+    [Obsolete("Throws Error: Bale Api not work correctly")]
     public static async Task<Message> SendAnimation(
         this BaleBotClient bot,
         long chatId,

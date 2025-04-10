@@ -67,6 +67,7 @@ public static partial class Methods
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
 
+    [Obsolete("Throws Error: Bale Api not work correctly")]
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
         long chatId,
@@ -129,6 +130,8 @@ public static partial class Methods
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
 
+    // has error
+    [Obsolete("Throws Error: Bale Api not work correctly")]
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
         long chatId,
