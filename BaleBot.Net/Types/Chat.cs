@@ -9,4 +9,5 @@ public class Chat
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public ChatPhoto? ChatPhoto { get; set; }
+    public string? InviteLink { get; set; }
 }

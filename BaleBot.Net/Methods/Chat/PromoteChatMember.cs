@@ -37,4 +37,28 @@ public static partial class Methods
 
         return await bot.SendRequest<bool>(request);
     }
+
+    public static async Task<bool> PromoteChatMemberWithAllAccess(
+        this BaleBotClient bot,
+        string chatId,
+        long userId
+    ) => await PromoteChatMember(bot, chatId, userId, true, true, true, true, true, true, true);
+
+    public static async Task<bool> PromoteChatMemberWithNoAccess(
+        this BaleBotClient bot,
+        string chatId,
+        long userId
+    ) =>
+        await PromoteChatMember(
+            bot,
+            chatId,
+            userId,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        );
 }

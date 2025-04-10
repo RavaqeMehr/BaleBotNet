@@ -8,15 +8,27 @@ var env =
     ?? throw new Exception("Failed to load env.json file.");
 
 var bot = new BaleBotClient(env.Token);
+// var me = await bot.GetMe();
 
-var me = await bot.GetMe();
-Message message;
 
-message = await bot.SendMessage(env.TestChatId, $"Hi! I'm @{me.Username} !");
-Console.WriteLine($"Message Sent: {message.MessageId}");
-var firstMessageId = message.MessageId;
+// Message message;
+// message = await bot.SendMessage(env.TestChatId, $"Hi! I'm @{me.Username} !");
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+// var firstMessageId = message.MessageId;
 
-#region Send, Edit & Delete Message
+#region Send Chat Action
+// var actions = Enum.GetNames(typeof(ChatAction)).ToList();
+// foreach (var action in actions)
+// {
+//     Console.WriteLine($"SendChatAction: {action}");
+//     var chatAction = (ChatAction)Enum.Parse(typeof(ChatAction), action);
+//     await bot.SendMessage(env.TestChatId, $"SendChatAction: {action}");
+//     await bot.SendChatAction(env.TestChatId, chatAction);
+//     await Task.Delay(3000);
+// }
+#endregion
+
+#region Message
 // message = await bot.SendMessage(
 //     env.TestChatId,
 //     "Hello, World! Reply with InlineKeyboardMarkup",
@@ -63,6 +75,8 @@ var firstMessageId = message.MessageId;
 // var deleted = await bot.DeleteMessage(env.TestChatId, firstMessageId);
 // Console.WriteLine($"Message Deleted: {deleted}");
 #endregion
+
+#region Media
 
 #region Send Photo
 // message = await bot.SendPhoto(
@@ -405,14 +419,50 @@ var firstMessageId = message.MessageId;
 // }
 #endregion
 
-#region Send Chat Action
-// var actions = Enum.GetNames(typeof(ChatAction)).ToList();
-// foreach (var action in actions)
-// {
-//     Console.WriteLine($"SendChatAction: {action}");
-//     var chatAction = (ChatAction)Enum.Parse(typeof(ChatAction), action);
-//     await bot.SendMessage(env.TestChatId, $"SendChatAction: {action}");
-//     await bot.SendChatAction(env.TestChatId, chatAction);
-//     await Task.Delay(3000);
-// }
+#endregion
+
+#region Chat
+// var testGroupChatId = "000";
+
+// var chat = await bot.GetChat(testGroupChatId);
+
+// Console.WriteLine($"GetChat: {chat.Title}");
+// Console.WriteLine($"GetChatMembersCount: {await bot.GetChatMembersCount(testGroupChatId)}");
+// Console.WriteLine(
+//     $"PromoteChatMemberWithAllAccess: {await bot.PromoteChatMemberWithAllAccess(testGroupChatId, 000)}"
+// );
+// Console.WriteLine(
+//     $"PromoteChatMemberWithNoAccess: {await bot.PromoteChatMemberWithNoAccess(testGroupChatId, 0000)}"
+// );
+// Console.WriteLine(
+//     $"CreateChatInviteLink: {(await bot.CreateChatInviteLink(testGroupChatId)).InviteLink}"
+// );
+// Console.WriteLine($"ExportChatInviteLink: {await bot.ExportChatInviteLink(testGroupChatId)}");
+// Console.WriteLine(
+//     $"RevokeChatInviteLink: {(await bot.RevokeChatInviteLink(testGroupChatId, "ble.ir/join/5mRQUc9dWu")).InviteLink}"
+// );
+// Console.WriteLine($"SetChatTitle: {await bot.SetChatTitle(testGroupChatId, chat.Title + ".")}");
+// Console.WriteLine(
+//     $"SetChatDescription: {await bot.SetChatDescription(testGroupChatId, chat.Title + ".")}"
+// );
+// Console.WriteLine(
+//     $"SetChatPhoto: {await bot.SetChatPhoto(testGroupChatId, new FileInfo(@"assets\bale.webp"))}"
+// );
+
+// Console.WriteLine($"BanChatMember: {await bot.BanChatMember(testGroupChatId, 0000)}");
+// Console.WriteLine(
+//     $"UnBanChatMember: {await bot.UnBanChatMember(testGroupChatId, 0000, true)}"
+// );
+// var message = await bot.SendMessage(long.Parse(testGroupChatId), "Hello, Chat!");
+// Console.WriteLine(
+//     $"PinChatMessage: {await bot.PinChatMessage(testGroupChatId, message.MessageId)}"
+// );
+// await Task.Delay(5000);
+// Console.WriteLine(
+//     $"PinChatMessage: {await bot.UnPinChatMessage(testGroupChatId, message.MessageId)}"
+// );
+// Console.WriteLine($"UnPinAllChatMessages: {await bot.UnPinAllChatMessages(testGroupChatId)}");
+// Console.WriteLine($"LeaveChat: {await bot.LeaveChat(testGroupChatId)}");
+
+
 #endregion

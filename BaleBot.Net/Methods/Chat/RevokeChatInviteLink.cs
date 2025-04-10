@@ -1,10 +1,11 @@
 using System.Net.Http.Json;
+using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
-    public static async Task<string> RevokeChatInviteLink(
+    public static async Task<InviteLinkResult> RevokeChatInviteLink(
         this BaleBotClient bot,
         string chatId,
         string inviteLink
@@ -15,6 +16,6 @@ public static partial class Methods
             Content = JsonContent.Create(new { chat_id = chatId, invite_link = inviteLink })
         };
 
-        return await bot.SendRequest<string>(request);
+        return await bot.SendRequest<InviteLinkResult>(request);
     }
 }
