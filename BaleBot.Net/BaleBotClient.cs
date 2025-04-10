@@ -46,7 +46,7 @@ public class BaleBotClient(string token, int timeout = 60)
         Console.WriteLine("----------------");
 #endif
 
-        Response<T> result = DeserializeFromJson<Response<T>>(responseString)!; //(await response.Content.ReadFromJsonAsync<Response<T>>(jsonOption))!;
+        Response<T> result = DeserializeFromJson<Response<T>>(responseString)!;
 
         if (!response.IsSuccessStatusCode)
         {
