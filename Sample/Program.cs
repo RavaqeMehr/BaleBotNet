@@ -172,7 +172,8 @@ var firstMessageId = message.MessageId;
 // Console.WriteLine($"Message Sent: {message.MessageId}");
 #endregion
 
-#region Send Animation # HAS ERROR
+// Has Errors
+#region Send Animation
 // message = await bot.SendAnimation(
 //     env.TestChatId,
 //     "https://novawebbusiness.com/wp-content/uploads/2022/12/Wow-gif.gif",
@@ -199,7 +200,6 @@ var firstMessageId = message.MessageId;
 // Console.WriteLine($"Message Sent: {message.MessageId}");
 #endregion
 
-
 #region Send Voice
 // message = await bot.SendVoice(
 //     env.TestChatId,
@@ -222,6 +222,25 @@ var firstMessageId = message.MessageId;
 //     new FileInfo(@"assets\voice.opus"),
 //     fileName: "سلام.opus",
 //     caption: "uploaded by local file!",
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+#endregion
+
+#region Send Location
+// message = await bot.SendLocation(
+//     env.TestChatId,
+//     35.9537207f,
+//     52.109088f,
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+
+// message = await bot.SendLocation(
+//     env.TestChatId,
+//     35.9537207f,
+//     52.109088f,
+//     horizontalAccuracy: 500,
 //     replyToMessageId: firstMessageId
 // );
 // Console.WriteLine($"Message Sent: {message.MessageId}");
