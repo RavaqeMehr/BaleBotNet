@@ -33,8 +33,10 @@ public class BaleBotClient(string token)
 #if DEBUG
         Console.WriteLine("----------------");
         Console.WriteLine($"Request [{request.RequestUri}] :");
+        Console.WriteLine(
+            request.Content != null ? await request.Content.ReadAsStringAsync() : "No Content"
+        );
 #endif
-
         var response = await httpClient.SendAsync(request);
         Response<T> result = (await response.Content.ReadFromJsonAsync<Response<T>>(jsonOption))!;
 
