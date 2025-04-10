@@ -384,24 +384,35 @@ var firstMessageId = message.MessageId;
 
 #endregion
 
-
 #region Download File
-string fileId = "948302853:-2130208011622211839:1:a6be9173b0d1d688d7c2f54fcdd42a151a9ec6f7595b78a8";
-var file = await bot.GetFile(fileId);
-if (await bot.Download(file, @"assets\downloaded1.tmp"))
-{
-    Console.WriteLine($"File Downloaded: {file.FileId}");
-}
-else
-{
-    Console.WriteLine($"File Not Found: {file.FileId}");
-}
-if (await bot.Download(fileId, @"assets\downloaded2.tmp"))
-{
-    Console.WriteLine($"File Downloaded: {file.FileId}");
-}
-else
-{
-    Console.WriteLine($"File Not Found: {file.FileId}");
-}
+// string fileId = "948302853:-2130208011622211839:1:a6be9173b0d1d688d7c2f54fcdd42a151a9ec6f7595b78a8";
+// var file = await bot.GetFile(fileId);
+// if (await bot.Download(file, @"assets\downloaded1.tmp"))
+// {
+//     Console.WriteLine($"File Downloaded: {file.FileId}");
+// }
+// else
+// {
+//     Console.WriteLine($"File Not Found: {file.FileId}");
+// }
+// if (await bot.Download(fileId, @"assets\downloaded2.tmp"))
+// {
+//     Console.WriteLine($"File Downloaded: {file.FileId}");
+// }
+// else
+// {
+//     Console.WriteLine($"File Not Found: {file.FileId}");
+// }
+#endregion
+
+#region Send Chat Action
+// var actions = Enum.GetNames(typeof(ChatAction)).ToList();
+// foreach (var action in actions)
+// {
+//     Console.WriteLine($"SendChatAction: {action}");
+//     var chatAction = (ChatAction)Enum.Parse(typeof(ChatAction), action);
+//     await bot.SendMessage(env.TestChatId, $"SendChatAction: {action}");
+//     await bot.SendChatAction(env.TestChatId, chatAction);
+//     await Task.Delay(3000);
+// }
 #endregion
