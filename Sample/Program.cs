@@ -271,3 +271,33 @@ var firstMessageId = message.MessageId;
 // );
 // Console.WriteLine($"Message Sent: {message.MessageId}");
 #endregion
+
+#region Send MediaGroup
+Message[] album;
+album = await bot.SendMediaGroup(
+    env.TestChatId,
+    [
+        new InputMediaPhoto(
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/800px-PNG_transparency_demonstration_1.png",
+            caption: "send by url!"
+        ),
+        new InputMediaPhoto(
+            "948302853:-2130208011622211839:1:a6be9173b0d1d688d7c2f54fcdd42a151a9ec6f7595b78a8",
+            caption: "send by fileId!"
+        )
+    ],
+    replyToMessageId: firstMessageId
+);
+Console.WriteLine($"Album Sent: {album.Length}");
+
+album = await bot.SendMediaGroup(
+    env.TestChatId,
+    [
+        new InputMediaPhoto(new FileInfo(@"assets\bale.webp"), caption: "uploaded1 by local file!"),
+        new InputMediaPhoto(new FileInfo(@"assets\sekke.jpg"), caption: "uploaded2 by local file!"),
+        new InputMediaPhoto(new FileInfo(@"assets\cat.gif"), caption: "uploaded3 by local file!")
+    ],
+    replyToMessageId: firstMessageId
+);
+Console.WriteLine($"Album Sent: {album.Length}");
+#endregion

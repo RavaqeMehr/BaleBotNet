@@ -2,8 +2,6 @@ namespace BaleBot.Net.Types;
 
 public class InputMediaAudio : InputMediaDocument
 {
-    public string? Title { get; set; }
-
     public InputMediaAudio(
         string fileIdOrUrl,
         string? thumbnailFileIdOrUrl = null,

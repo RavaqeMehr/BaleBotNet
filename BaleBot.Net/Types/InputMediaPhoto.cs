@@ -2,8 +2,6 @@ namespace BaleBot.Net.Types;
 
 public class InputMediaPhoto : InputMedia
 {
-    public FileInfo? FileInfo { get; set; }
-
     public InputMediaPhoto(string fileIdOrUrl, string? caption = null)
     {
         Type = "photo";
@@ -15,7 +13,6 @@ public class InputMediaPhoto : InputMedia
     {
         Type = "photo";
         Caption = caption;
-        Media = "<attach://file>";
         FileInfo = file;
     }
 }
