@@ -118,6 +118,33 @@ var firstMessageId = message.MessageId;
 // Console.WriteLine($"Message Sent: {message.MessageId}");
 #endregion
 
+#region Send Video
+message = await bot.SendVideo(
+    env.TestChatId,
+    "https://download.samplelib.com/mp4/sample-5s.mp4",
+    "send by url!",
+    firstMessageId
+);
+Console.WriteLine($"Message Sent: {message.MessageId}");
+
+message = await bot.SendVideo(
+    env.TestChatId,
+    "6313375308:-345340924282003710:1:ae6f9a208f138674e437abb5ef79a91267396412d657974b1c6a2f3cfa2833b7",
+    "send by fileId!",
+    firstMessageId
+);
+Console.WriteLine($"Message Sent: {message.MessageId}");
+
+message = await bot.SendVideo(
+    env.TestChatId,
+    new FileInfo(@"assets\video.mp4"),
+    fileName: "earth.mp4",
+    caption: "uploaded by local file!",
+    replyToMessageId: firstMessageId
+);
+Console.WriteLine($"Message Sent: {message.MessageId}");
+#endregion
+
 #region Send Document
 // message = await bot.SendDocument(
 //     env.TestChatId,

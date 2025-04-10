@@ -10,7 +10,8 @@ public static partial class Methods
     {
         SendPhoto,
         SendAudio,
-        SendDocument
+        SendDocument,
+        SendVideo
     }
 
     private static string GetMethodUrl(this SendMethod sendMethod) =>
@@ -18,6 +19,7 @@ public static partial class Methods
         {
             SendMethod.SendPhoto => "sendPhoto",
             SendMethod.SendAudio => "sendAudio",
+            SendMethod.SendVideo => "sendVideo",
             SendMethod.SendDocument => "sendDocument",
             _ => throw new ArgumentOutOfRangeException(nameof(sendMethod), sendMethod, null)
         };
@@ -28,6 +30,7 @@ public static partial class Methods
             {
                 SendMethod.SendPhoto => "image/jpeg",
                 SendMethod.SendAudio => "audio/mpeg",
+                SendMethod.SendVideo => "video/mp4",
                 SendMethod.SendDocument => "application/octet-stream",
                 _ => throw new ArgumentOutOfRangeException(nameof(sendMethod), sendMethod, null)
             }
@@ -38,6 +41,7 @@ public static partial class Methods
         {
             SendMethod.SendPhoto => "photo",
             SendMethod.SendAudio => "audio",
+            SendMethod.SendVideo => "video",
             SendMethod.SendDocument => "document",
             _ => throw new ArgumentOutOfRangeException(nameof(sendMethod), sendMethod, null)
         };
