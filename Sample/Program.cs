@@ -245,3 +245,29 @@ var firstMessageId = message.MessageId;
 // );
 // Console.WriteLine($"Message Sent: {message.MessageId}");
 #endregion
+
+#region Send Contact
+// message = await bot.SendContact(
+//     env.TestChatId,
+//     "09876543210",
+//     "Test local",
+//     "Contact",
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+
+// message = await bot.SendContact(
+//     env.TestChatId,
+//     "+989876543210",
+//     "Test +98",
+//     replyToMessageId: firstMessageId
+// );
+
+// message = await bot.SendContact(
+//     env.TestChatId,
+//     "00989876543210",
+//     "Test 0098",
+//     replyToMessageId: firstMessageId
+// );
+// Console.WriteLine($"Message Sent: {message.MessageId}");
+#endregion
