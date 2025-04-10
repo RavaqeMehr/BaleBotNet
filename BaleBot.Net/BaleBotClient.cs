@@ -4,7 +4,7 @@ using BaleBot.Net.Types;
 
 namespace BaleBot.Net;
 
-public class BaleBotClient(string token)
+public class BaleBotClient(string token, int timeout = 60)
 {
     public readonly string Token = token;
 
@@ -12,7 +12,7 @@ public class BaleBotClient(string token)
     {
         BaseAddress = new Uri($"https://tapi.bale.ai/bot{token}/"),
         DefaultRequestHeaders = { { "User-Agent", "BaleBot.Net" } },
-        Timeout = TimeSpan.FromSeconds(60)
+        Timeout = TimeSpan.FromSeconds(timeout)
     };
 
     public static readonly JsonSerializerOptions jsonOption =
