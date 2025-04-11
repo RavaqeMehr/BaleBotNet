@@ -21,6 +21,7 @@
       The library is designed to be user-friendly and efficient, making it easy for developers to get started with the Bale Messenger API. It abstracts away the complexities of the underlying API, allowing developers to focus on building their applications without worrying about the details of the API implementation.
       Official docs for the API can be found at: https://docs.bale.ai
     </Description>
+    <PackageReadmeFile>../README.md</PackageReadmeFile>
   </PropertyGroup>
 
 </Project>
