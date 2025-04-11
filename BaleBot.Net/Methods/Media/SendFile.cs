@@ -54,7 +54,7 @@ public static partial class Methods
     private static async Task<Message> SendFile(
         this BaleBotClient bot,
         SendMethod sendMethod,
-        long chatId,
+        string chatId,
         string fileIdOrUrl,
         string? caption = null,
         long? replyToMessageId = null,
@@ -82,7 +82,7 @@ public static partial class Methods
     private static async Task<Message> SendFile(
         this BaleBotClient bot,
         SendMethod sendMethod,
-        long chatId,
+        string chatId,
         FileInfo fileInfo,
         string? fileName = null,
         string? caption = null,

@@ -7,7 +7,7 @@ public static partial class Methods
 {
     public static async Task<Message> SendContact(
         this BaleBotClient bot,
-        long chatId,
+        string chatId,
         string phoneNumber,
         string firstName,
         string? lastName = null,

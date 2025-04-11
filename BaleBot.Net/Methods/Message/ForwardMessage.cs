@@ -7,7 +7,7 @@ public static partial class Methods
 {
     public static async Task<Message> ForwardMessage(
         this BaleBotClient bot,
-        long chatId,
+        string chatId,
         long fromChatId,
         long messageId
     )

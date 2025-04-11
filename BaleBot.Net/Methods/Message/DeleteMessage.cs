@@ -6,7 +6,7 @@ public static partial class Methods
 {
     public static async Task<bool> DeleteMessage(
         this BaleBotClient bot,
-        long chatId,
+        string chatId,
         long messageId
     )
     {

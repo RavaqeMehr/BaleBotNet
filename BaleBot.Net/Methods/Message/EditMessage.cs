@@ -7,7 +7,7 @@ public static partial class Methods
 {
     public static async Task<Message> EditMessage(
         this BaleBotClient bot,
-        long chatId,
+        string chatId,
         long messageId,
         string text,
         IReplyMarkup? replyMarkup = null

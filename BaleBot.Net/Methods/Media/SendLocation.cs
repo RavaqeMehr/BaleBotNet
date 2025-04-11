@@ -7,7 +7,7 @@ public static partial class Methods
 {
     public static async Task<Message> SendLocation(
         this BaleBotClient bot,
-        long chatId,
+        string chatId,
         float latitude,
         float longitude,
         int? horizontalAccuracy = null,
