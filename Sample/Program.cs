@@ -471,3 +471,21 @@ var bot = new BaleBotClient(env.Token);
 // var webhookInfo = await bot.GetWebhookInfo();
 // Console.WriteLine($"Webhook Url: {webhookInfo.Url}");
 #endregion
+
+#region Bot
+// var updates = await bot.GetUpdates();
+// foreach (var update in updates)
+// {
+//     Console.WriteLine($"Update Id: {update.UpdateId}");
+//     if (update.Message != null)
+//     {
+//         Console.WriteLine($"Message Id: {update.Message.MessageId}");
+//         Console.WriteLine($"Message Text: {update.Message.Text}");
+//     }
+//     if (update.CallbackQuery != null)
+//     {
+//         Console.WriteLine($"Callback Query Id: {update.CallbackQuery.Id}");
+//         Console.WriteLine($"Callback Query Data: {update.CallbackQuery.Data}");
+//     }
+// }
+#endregion
