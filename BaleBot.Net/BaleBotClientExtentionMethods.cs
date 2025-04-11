@@ -38,7 +38,10 @@ namespace BaleBot.Net
 
             var salt = Guid.NewGuid().ToString().Replace("-", "");
             var webhookPath = $"{webhookPrefix}/{salt}";
-            var webhookUrl = $"{appBaseUrl}/{webhookPath}";
+            var webhookUrl = $"{appBaseUrl}{webhookPath}";
+
+            Console.WriteLine($"Webhook URL: {webhookUrl}");
+            Console.WriteLine($"Webhook Path: {webhookPath}");
 
             _ = bot.SetWebhook(webhookUrl).Result;
 
