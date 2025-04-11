@@ -5,7 +5,6 @@ namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
-    [Obsolete("Throws Error: Bale Api not work correctly")]
     public static async Task<bool> UploadStickerFile(
         this BaleBotClient bot,
         long userId,
