@@ -28,7 +28,7 @@ public static class EnumsExtentions
             _ => "typing"
         };
 
-    public static ChatType GetType(this Chat chat) =>
+    public static ChatType GetChatType(this Chat chat) =>
         chat.Type switch
         {
             "private" => ChatType.Private,
