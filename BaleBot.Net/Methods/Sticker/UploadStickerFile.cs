@@ -1,11 +1,12 @@
 using System.Net.Http.Headers;
 using System.Net.Mime;
+using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
-    public static async Task<bool> UploadStickerFile(
+    public static async Task<Sticker> UploadStickerFile(
         this BaleBotClient bot,
         long userId,
         FileInfo sticker
@@ -26,6 +27,6 @@ public static partial class Methods
             Content = form
         };
 
-        return await bot.SendRequest<bool>(request);
+        return await bot.SendRequest<Sticker>(request);
     }
 }

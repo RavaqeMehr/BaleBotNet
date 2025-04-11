@@ -5,7 +5,7 @@ namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
-    public static async Task<Message> CreateNewStickerSet(
+    public static async Task<bool> CreateNewStickerSet(
         this BaleBotClient bot,
         long userId,
         string name,
@@ -28,6 +28,6 @@ public static partial class Methods
             )
         };
 
-        return await bot.SendRequest<Message>(request);
+        return await bot.SendRequest<bool>(request);
     }
 }
