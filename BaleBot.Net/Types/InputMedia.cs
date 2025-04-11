@@ -47,10 +47,10 @@ public static class InputMediaExtensions
         var metaDatas = new List<InputMediaForUploadMetaData>();
 
         MultipartFormDataContent content = new();
-        foreach (var item in inputMedias.Index())
+        var inputMediaNumber = 0;
+        foreach (var inputMedia in inputMedias)
         {
-            var inputMedia = item.Item;
-            var inputMediaNumber = item.Index + 1;
+            inputMediaNumber += 1;
 
             InputMediaForUploadMetaData itemMetaData = new() { Type = inputMedia.Type };
             if (inputMedia.Caption is string caption && caption.Length > 0)
