@@ -5,7 +5,7 @@ namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
-    public static async Task<InviteLinkResult> CreateChatInviteLink(
+    public static async Task<InviteLinkResponse> CreateChatInviteLink(
         this BaleBotClient bot,
         string chatId
     )
@@ -15,6 +15,6 @@ public static partial class Methods
             Content = JsonContent.Create(new { chat_id = chatId })
         };
 
-        return await bot.SendRequest<InviteLinkResult>(request);
+        return await bot.SendRequest<InviteLinkResponse>(request);
     }
 }

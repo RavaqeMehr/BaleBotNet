@@ -1,6 +1,6 @@
 namespace BaleBot.Net.Types;
 
-public class InviteLinkResult
+public class InviteLinkResponse
 {
     public string? InviteLink { get; set; }
     public User? Creator { get; set; }
