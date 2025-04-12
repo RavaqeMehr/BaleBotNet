@@ -10,7 +10,7 @@ var env =
     JsonSerializer.Deserialize<Env>(await System.IO.File.ReadAllTextAsync("env.json"))
     ?? throw new Exception("Failed to load env.json file.");
 
-builder.Services.AddBaleBotClient(env.Token);
+var bot = builder.Services.AddBaleBotClient(env.Token);
 
 var app = builder.Build();
 
