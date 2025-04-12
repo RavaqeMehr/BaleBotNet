@@ -1,3 +1,5 @@
+using BaleBot.Net.Enums;
+
 namespace BaleBot.Net.Methods;
 
 public static partial class Methods
