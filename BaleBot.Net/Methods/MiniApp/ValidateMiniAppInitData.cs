@@ -1,7 +1,6 @@
 using System.Security;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Json;
 using System.Web;
 using BaleBot.Net.Types;
 
@@ -15,21 +14,18 @@ public static partial class Methods
     )
     {
         bool loginWidget = false;
-        // Console.WriteLine($"bot.Token:\n{bot.Token}\n");
-        // Console.WriteLine($"initData:\n{initData}\n");
 
-        var decoded = HttpUtility.UrlDecode(initData ?? "");
-        // Console.WriteLine($"decoded:\n{decoded}\n");
-
-        // var query = HttpUtility.ParseQueryString(decoded ?? "");
         var query = HttpUtility.ParseQueryString(initData ?? "");
+        if (query.AllKeys.Where(x => x != null).Count() == 0)
+        {
+            var decoded = HttpUtility.UrlDecode(initData ?? "");
+            query = HttpUtility.ParseQueryString(decoded ?? "");
+        }
 
         var fields = query.AllKeys.ToDictionary(key => key!, key => query[key]!);
 
         if (fields.Remove("hash", out var hash))
         {
-            // Console.WriteLine($"hash:\n{hash}\n");
-
             var dataCheckString = string.Join('\n', fields.Select(kvp => $"{kvp.Key}={kvp.Value}"));
             var secretKey = loginWidget
                 ? SHA256.HashData(Encoding.ASCII.GetBytes(bot.Token))
@@ -41,8 +37,6 @@ public static partial class Methods
                 secretKey,
                 Encoding.UTF8.GetBytes(dataCheckString)
             );
-
-            // Console.WriteLine($"computedHash:\n{Convert.ToHexString(computedHash)}\n");
 
             if (computedHash.SequenceEqual(Convert.FromHexString(hash)))
                 return new()
