@@ -3,12 +3,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Web;
+using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
-    public static Dictionary<string, string>? ValidateMiniAppInitData(
+    public static ValidatedMiniAppInitData ValidateMiniAppInitData(
         this BaleBotClient bot,
         string initData
     )
@@ -44,7 +45,12 @@ public static partial class Methods
             // Console.WriteLine($"computedHash:\n{Convert.ToHexString(computedHash)}\n");
 
             if (computedHash.SequenceEqual(Convert.FromHexString(hash)))
-                return fields;
+                return new()
+                {
+                    QueryId = fields["query_id"],
+                    AuthDate = int.Parse(fields["auth_date"]),
+                    User = BaleBotClient.DeserializeFromJson<WebAppUser>(fields["user"])!,
+                };
         }
         throw new SecurityException("Invalid data hash");
     }
