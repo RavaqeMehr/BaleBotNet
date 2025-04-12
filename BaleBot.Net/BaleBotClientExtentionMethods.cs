@@ -8,14 +8,15 @@ namespace BaleBot.Net
 {
     public static class BaleBotClientExtentionMethods
     {
-        public static IServiceCollection AddBaleBotClient(
+        public static BaleBotClient AddBaleBotClient(
             this IServiceCollection services,
             string token,
             int timeout = 60
         )
         {
-            return services
-                .AddSingleton(new BaleBotClient(token, timeout))
+            BaleBotClient baleBotClient = new BaleBotClient(token, timeout);
+            services
+                .AddSingleton(baleBotClient)
                 .Configure<JsonOptions>(options =>
                 {
                     options.SerializerOptions.PropertyNameCaseInsensitive = BaleBotClient
@@ -26,6 +27,8 @@ namespace BaleBot.Net
                         .jsonOption
                         .PropertyNamingPolicy;
                 });
+
+            return baleBotClient;
         }
 
         private static string SetWebhook(

@@ -28,13 +28,11 @@ public class BaleBotClient(string token, int timeout = 60)
                 .WhenWritingNull
         };
 
-    public async Task<T> SendRequest<T>(HttpRequestMessage request)
+    internal async Task<T> SendRequest<T>(HttpRequestMessage request)
     {
 #if DEBUG
-        Console.WriteLine($"Request [{request.RequestUri}] : ----------------");
-        Console.WriteLine(
-            request.Content != null ? await request.Content.ReadAsStringAsync() : "No Content"
-        );
+        Console.WriteLine($"{GetReqeustMethodAndUriForLog(request, false)} : ----------------");
+        Console.WriteLine(await GetRequestBodyForLog(request));
 #endif
 
         var response = await httpClient.SendAsync(request);
@@ -51,11 +49,35 @@ public class BaleBotClient(string token, int timeout = 60)
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception(
-                $"SendRequest [{request.RequestUri!.LocalPath.Replace(Token, "").Replace("//", "/").Replace("/bot", "")}] Error: {result.Description} ({result.ErrorCode})"
+                $"Error In {GetReqeustMethodAndUriForLog(request, true)}: {result.Description} ({result.ErrorCode})",
+                new(await GetRequestBodyForLog(request))
             );
         }
 
         return result.Result!;
+    }
+
+    private string GetReqeustMethodAndUriForLog(HttpRequestMessage request, bool suppressToken)
+    {
+        if (suppressToken)
+        {
+            var uri = request
+                .RequestUri!.LocalPath.Replace(Token, "")
+                .Replace("//", "/")
+                .Replace("/bot", "");
+            return $"{request.Method.Method.ToUpper()} [{uri}]";
+        }
+        else
+        {
+            return $"{request.Method.Method.ToUpper()} [{request.RequestUri}]";
+        }
+    }
+
+    private async Task<string> GetRequestBodyForLog(HttpRequestMessage request)
+    {
+        return request.Content != null
+            ? await request.Content.ReadAsStringAsync()
+            : "Empty Request Body";
     }
 
     public async Task<Stream> StreamDownloader(string fileUrl)
