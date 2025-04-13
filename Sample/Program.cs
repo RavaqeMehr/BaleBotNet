@@ -15,7 +15,7 @@ var env =
 var bot = builder.Services.AddBaleBotClient(env.Token);
 
 // For Handling Updates Use This:
-builder.Services.AddScoped<IUpdateHandler, UpdateHandler>();
+// builder.Services.AddScoped<IUpdateHandler, UpdateHandler>();
 
 // Or These:
 builder.Services.AddScoped<IMessageUpdateHandler, MessageUpdateHandler>();
