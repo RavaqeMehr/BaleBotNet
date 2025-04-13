@@ -134,10 +134,10 @@ namespace BaleBot.Net
 
             app.MapPost(
                 webhookPath,
-                async Task (ServiceProvider serviceProvider, Update update) =>
+                async Task (IServiceScopeFactory serviceScopeFactory, Update update) =>
                 {
                     var updateId = update.UpdateId;
-                    using var scope = serviceProvider.CreateScope();
+                    using var scope = serviceScopeFactory.CreateScope();
                     var updateTask = update switch
                     {
                         { Message: { } message }
