@@ -1,8 +1,9 @@
 namespace BaleBot.Net.Types;
 
-public class ValidatedMiniAppInitData
+public class ValidatedMiniAppInitData(Dictionary<string, string> fields)
 {
-    public int AuthDate { get; set; }
-    public string QueryId { get; set; } = default!;
-    public WebAppUser User { get; set; } = default!;
+    public int AuthDate { get; set; } = int.Parse(fields["auth_date"]);
+    public string QueryId { get; set; } = fields["query_id"];
+    public WebAppUser User { get; set; } =
+        BaleBotClient.DeserializeFromJson<WebAppUser>(fields["user"])!;
 }

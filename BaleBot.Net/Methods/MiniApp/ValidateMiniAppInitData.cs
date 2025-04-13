@@ -39,12 +39,7 @@ public static partial class Methods
             );
 
             if (computedHash.SequenceEqual(Convert.FromHexString(hash)))
-                return new()
-                {
-                    QueryId = fields["query_id"],
-                    AuthDate = int.Parse(fields["auth_date"]),
-                    User = BaleBotClient.DeserializeFromJson<WebAppUser>(fields["user"])!,
-                };
+                return new(fields);
         }
         throw new SecurityException("Invalid data hash");
     }
