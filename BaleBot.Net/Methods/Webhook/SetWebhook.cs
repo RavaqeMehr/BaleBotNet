@@ -6,7 +6,7 @@ public static partial class Methods
 {
     public static async Task<bool> SetWebhook(this BaleBotClient bot, string url)
     {
-        var request = new HttpRequestMessage(HttpMethod.Get, "setWebhook")
+        var request = new HttpRequestMessage(HttpMethod.Post, "setWebhook")
         {
             Content = JsonContent.Create(new { url })
         };
