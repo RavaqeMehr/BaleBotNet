@@ -107,6 +107,65 @@ namespace BaleBot.Net
             return app;
         }
 
+        public static WebApplication MapBaleBotWebhook(
+            this WebApplication app,
+            string appBaseUrl,
+            string webhookPrefix = "/integrations/bale/update-webhook"
+        )
+        {
+            var webhookPath = SetWebhook(app, appBaseUrl, webhookPrefix);
+
+            app.MapPost(
+                webhookPath,
+                async (IUpdateHandler updateHandler, Update update) =>
+                    await updateHandler.HandleUpdate(update)
+            );
+
+            return app;
+        }
+
+        public static WebApplication MapBaleBotWebhookWithSepratedHandleres(
+            this WebApplication app,
+            string appBaseUrl,
+            string webhookPrefix = "/integrations/bale/update-webhook"
+        )
+        {
+            var webhookPath = SetWebhook(app, appBaseUrl, webhookPrefix);
+
+            app.MapPost(
+                webhookPath,
+                async Task (ServiceProvider serviceProvider, Update update) =>
+                {
+                    var updateId = update.UpdateId;
+                    using var scope = serviceProvider.CreateScope();
+                    var updateTask = update switch
+                    {
+                        { Message: { } message }
+                            => scope
+                                .ServiceProvider.GetRequiredService<IMessageUpdateHandler>()
+                                .HandleUpdate(updateId, message),
+                        { EditedMessage: { } editedMessage }
+                            => scope
+                                .ServiceProvider.GetRequiredService<IEditedMessageUpdateHandler>()
+                                .HandleUpdate(updateId, editedMessage),
+                        { CallbackQuery: { } callbackQuery }
+                            => scope
+                                .ServiceProvider.GetRequiredService<ICallbackQueryUpdateHandler>()
+                                .HandleUpdate(updateId, callbackQuery),
+                        { PreCheckoutQuery: { } preCheckoutQuery }
+                            => scope
+                                .ServiceProvider.GetRequiredService<IPreCheckoutQueryUpdateHandler>()
+                                .HandleUpdate(updateId, preCheckoutQuery),
+                        _ => Task.CompletedTask
+                    };
+
+                    await updateTask;
+                }
+            );
+
+            return app;
+        }
+
         public static WebApplication MapBaleBotValidateInitDataApi(
             this WebApplication app,
             string validatePath = "/integrations/bale/mini-app/validate"
