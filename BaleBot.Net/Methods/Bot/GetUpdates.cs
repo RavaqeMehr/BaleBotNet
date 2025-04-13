@@ -11,7 +11,7 @@ public static partial class Methods
         int? limit = null
     )
     {
-        var request = new HttpRequestMessage(HttpMethod.Get, "getUpdates")
+        var request = new HttpRequestMessage(HttpMethod.Post, "getUpdates")
         {
             Content = JsonContent.Create(new { offset, limit })
         };
