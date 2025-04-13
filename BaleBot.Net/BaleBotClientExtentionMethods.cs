@@ -106,5 +106,18 @@ namespace BaleBot.Net
 
             return app;
         }
+
+        public static WebApplication MapBaleBotValidateInitDataApi(
+            this WebApplication app,
+            string validatePath = "/api/bale/mini-app/validate/{initData}"
+        )
+        {
+            app.MapGet(
+                validatePath,
+                (BaleBotClient bot, string initData) => bot.ValidateMiniAppInitData(initData)
+            );
+
+            return app;
+        }
     }
 }

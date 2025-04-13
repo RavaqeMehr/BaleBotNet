@@ -22,4 +22,6 @@ app.MapBaleBotWebhook(
     }
 );
 
+app.MapBaleBotValidateInitDataApi();
+
 app.Run();
