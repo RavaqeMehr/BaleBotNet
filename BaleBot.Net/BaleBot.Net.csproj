@@ -22,14 +22,11 @@
       Official docs for the API can be found at: https://docs.bale.ai
     </Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <!-- <PackageIcon>package-icon.png</PackageIcon> -->
+    <PackageIcon>bale.png</PackageIcon>
   </PropertyGroup>
 
    <ItemGroup>
-    <!-- <None Include="../package-icon.png">
-      <Pack>true</Pack>
-      <PackagePath>/</PackagePath>
-    </None> -->
+    <None Include="../bale.png" Pack="true" PackagePath="/" />
     <None Include="../README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 
