@@ -58,7 +58,7 @@ namespace BaleBot.Net
             Func<Message, Task> handleEditedMessage,
             Func<CallbackQuery, Task> handleCallbackQuery,
             Func<PreCheckoutQuery, Task> handlePreCheckoutQuery,
-            string webhookPrefix = "/webhooks/bale"
+            string webhookPrefix = "/integrations/bale/update-webhook"
         )
         {
             var webhookPath = SetWebhook(app, appBaseUrl, webhookPrefix);
@@ -97,7 +97,7 @@ namespace BaleBot.Net
             this WebApplication app,
             string appBaseUrl,
             Func<Update, Task> handleUpdate,
-            string webhookPrefix = "/webhooks/bale"
+            string webhookPrefix = "/integrations/bale/update-webhook"
         )
         {
             var webhookPath = SetWebhook(app, appBaseUrl, webhookPrefix);
@@ -109,7 +109,7 @@ namespace BaleBot.Net
 
         public static WebApplication MapBaleBotValidateInitDataApi(
             this WebApplication app,
-            string validatePath = "/api/bale/mini-app/validate"
+            string validatePath = "/integrations/bale/mini-app/validate"
         )
         {
             app.MapGet(
