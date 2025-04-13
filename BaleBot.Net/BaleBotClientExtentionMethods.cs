@@ -109,11 +109,11 @@ namespace BaleBot.Net
 
         public static WebApplication MapBaleBotValidateInitDataApi(
             this WebApplication app,
-            string validatePath = "/api/bale/mini-app/validate/{initData}"
+            string validatePath = "/api/bale/mini-app/validate"
         )
         {
             app.MapGet(
-                validatePath,
+                validatePath + "/{initData}",
                 (BaleBotClient bot, string initData) => bot.ValidateMiniAppInitData(initData)
             );
 
