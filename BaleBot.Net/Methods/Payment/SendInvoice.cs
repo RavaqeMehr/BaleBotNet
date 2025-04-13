@@ -36,4 +36,27 @@ public static partial class Methods
 
         return await bot.SendRequest<Message>(request);
     }
+
+    public static async Task<Message> SendInvoice(
+        this BaleBotClient bot,
+        long chatId,
+        string title,
+        string description,
+        string payload,
+        string providerToken,
+        LabeledPrice[] prices,
+        string? photoUrl = null,
+        long? replyToMessageId = null
+    ) =>
+        await SendInvoice(
+            bot,
+            chatId.ToString(),
+            title,
+            description,
+            payload,
+            providerToken,
+            prices,
+            photoUrl,
+            replyToMessageId
+        );
 }

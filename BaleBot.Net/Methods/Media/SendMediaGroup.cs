@@ -48,10 +48,24 @@ public static partial class Methods
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
+        long chatId,
+        InputMediaPhotoForUpload[] media,
+        long? replyToMessageId = null
+    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
+
+    public static async Task<Message[]> SendMediaGroup(
+        this BaleBotClient bot,
         string chatId,
         InputMediaVideoForUpload[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
+
+    public static async Task<Message[]> SendMediaGroup(
+        this BaleBotClient bot,
+        long chatId,
+        InputMediaVideoForUpload[] media,
+        long? replyToMessageId = null
+    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
@@ -62,10 +76,24 @@ public static partial class Methods
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
+        long chatId,
+        InputMediaDocumentForUpload[] media,
+        long? replyToMessageId = null
+    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
+
+    public static async Task<Message[]> SendMediaGroup(
+        this BaleBotClient bot,
         string chatId,
         InputMediaAudioForUpload[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
+
+    public static async Task<Message[]> SendMediaGroup(
+        this BaleBotClient bot,
+        long chatId,
+        InputMediaAudioForUpload[] media,
+        long? replyToMessageId = null
+    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
 
     [Obsolete("Throws Error: Bale Api not work correctly")]
     public static async Task<Message[]> SendMediaGroup(
@@ -74,6 +102,14 @@ public static partial class Methods
         InputMediaAnimationForUpload[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
+
+    [Obsolete("Throws Error: Bale Api not work correctly")]
+    public static async Task<Message[]> SendMediaGroup(
+        this BaleBotClient bot,
+        long chatId,
+        InputMediaAnimationForUpload[] media,
+        long? replyToMessageId = null
+    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
 
     #endregion
 
@@ -111,10 +147,24 @@ public static partial class Methods
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
+        long chatId,
+        InputMediaPhotoForFileIdOrUrl[] media,
+        long? replyToMessageId = null
+    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
+
+    public static async Task<Message[]> SendMediaGroup(
+        this BaleBotClient bot,
         string chatId,
         InputMediaVideoForFileIdOrUrl[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
+
+    public static async Task<Message[]> SendMediaGroup(
+        this BaleBotClient bot,
+        long chatId,
+        InputMediaVideoForFileIdOrUrl[] media,
+        long? replyToMessageId = null
+    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
@@ -125,10 +175,24 @@ public static partial class Methods
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
+        long chatId,
+        InputMediaDocumentForFileIdOrUrl[] media,
+        long? replyToMessageId = null
+    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
+
+    public static async Task<Message[]> SendMediaGroup(
+        this BaleBotClient bot,
         string chatId,
         InputMediaAudioForFileIdOrUrl[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
+
+    public static async Task<Message[]> SendMediaGroup(
+        this BaleBotClient bot,
+        long chatId,
+        InputMediaAudioForFileIdOrUrl[] media,
+        long? replyToMessageId = null
+    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
 
     // has error
     [Obsolete("Throws Error: Bale Api not work correctly")]
@@ -138,6 +202,14 @@ public static partial class Methods
         InputMediaAnimationForFileIdOrUrl[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
+
+    [Obsolete("Throws Error: Bale Api not work correctly")]
+    public static async Task<Message[]> SendMediaGroup(
+        this BaleBotClient bot,
+        long chatId,
+        InputMediaAnimationForFileIdOrUrl[] media,
+        long? replyToMessageId = null
+    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
 
     #endregion
 }

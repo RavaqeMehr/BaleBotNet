@@ -17,4 +17,10 @@ public static partial class Methods
 
         return await bot.SendRequest<bool>(request);
     }
+
+    public static async Task<bool> UnPinChatMessage(
+        this BaleBotClient bot,
+        long chatId,
+        long messageId
+    ) => await UnPinChatMessage(bot, chatId.ToString(), messageId);
 }

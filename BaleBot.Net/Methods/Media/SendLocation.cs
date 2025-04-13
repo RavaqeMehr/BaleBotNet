@@ -32,4 +32,23 @@ public static partial class Methods
 
         return await bot.SendRequest<Message>(request);
     }
+
+    public static async Task<Message> SendLocation(
+        this BaleBotClient bot,
+        long chatId,
+        float latitude,
+        float longitude,
+        int? horizontalAccuracy = null,
+        long? replyToMessageId = null,
+        IReplyMarkup? replyMarkup = null
+    ) =>
+        await SendLocation(
+            bot,
+            chatId.ToString(),
+            latitude,
+            longitude,
+            horizontalAccuracy,
+            replyToMessageId,
+            replyMarkup
+        );
 }

@@ -13,4 +13,7 @@ public static partial class Methods
 
         return await bot.SendRequest<string>(request);
     }
+
+    public static async Task<string> ExportChatInviteLink(this BaleBotClient bot, long chatId) =>
+        await ExportChatInviteLink(bot, chatId.ToString());
 }

@@ -30,4 +30,11 @@ public static partial class Methods
 
         return await bot.SendRequest<bool>(request);
     }
+
+    [Obsolete("Throws Error: Bale Api not work correctly")]
+    public static async Task<bool> SetChatPhoto(
+        this BaleBotClient bot,
+        long chatId,
+        FileInfo photo
+    ) => await SetChatPhoto(bot, chatId.ToString(), photo);
 }

@@ -13,4 +13,7 @@ public static partial class Methods
 
         return await bot.SendRequest<int>(request);
     }
+
+    public static async Task<int> GetChatMembersCount(this BaleBotClient bot, long chatId) =>
+        await GetChatMembersCount(bot, chatId.ToString());
 }

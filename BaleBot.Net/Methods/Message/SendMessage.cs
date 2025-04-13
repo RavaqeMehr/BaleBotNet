@@ -28,4 +28,12 @@ public static partial class Methods
 
         return await bot.SendRequest<Message>(request);
     }
+
+    public static async Task<Message> SendMessage(
+        this BaleBotClient bot,
+        long chatId,
+        string text,
+        long? replyToMessageId = null,
+        IReplyMarkup? replyMarkup = null
+    ) => await SendMessage(bot, chatId.ToString(), text, replyToMessageId, replyMarkup);
 }

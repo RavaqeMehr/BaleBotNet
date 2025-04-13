@@ -13,4 +13,10 @@ public static partial class Methods
 
         return await bot.SendRequest<bool>(request);
     }
+
+    public static async Task<bool> BanChatMember(
+        this BaleBotClient bot,
+        long chatId,
+        long userId
+    ) => await BanChatMember(bot, chatId.ToString(), userId);
 }

@@ -18,4 +18,10 @@ public static partial class Methods
 
         return await bot.SendRequest<InviteLinkResponse>(request);
     }
+
+    public static async Task<InviteLinkResponse> RevokeChatInviteLink(
+        this BaleBotClient bot,
+        long chatId,
+        string inviteLink
+    ) => await RevokeChatInviteLink(bot, chatId.ToString(), inviteLink);
 }

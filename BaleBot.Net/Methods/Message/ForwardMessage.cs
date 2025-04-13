@@ -26,4 +26,11 @@ public static partial class Methods
 
         return await bot.SendRequest<Message>(request);
     }
+
+    public static async Task<Message> ForwardMessage(
+        this BaleBotClient bot,
+        long chatId,
+        long fromChatId,
+        long messageId
+    ) => await ForwardMessage(bot, chatId.ToString(), fromChatId, messageId);
 }
