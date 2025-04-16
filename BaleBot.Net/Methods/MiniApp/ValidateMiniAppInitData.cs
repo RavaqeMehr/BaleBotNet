@@ -10,7 +10,8 @@ public static partial class Methods
 {
     public static ValidatedMiniAppInitData ValidateMiniAppInitData(
         this BaleBotClient bot,
-        string initData
+        string initData,
+        int expireAfterMinutes
     )
     {
         bool loginWidget = false;
@@ -23,6 +24,14 @@ public static partial class Methods
         }
 
         var fields = query.AllKeys.ToDictionary(key => key!, key => query[key]!);
+
+        var authDate = long.Parse(fields["auth_date"]);
+        var nowUnix = (long)DateTime.UtcNow.Subtract(DateTime.UnixEpoch).TotalSeconds;
+        var diff = TimeSpan.FromSeconds(nowUnix - authDate);
+        if (diff > TimeSpan.FromMinutes(expireAfterMinutes))
+        {
+            throw new SecurityException("Data is expired!");
+        }
 
         if (fields.Remove("hash", out var hash))
         {
@@ -41,6 +50,6 @@ public static partial class Methods
             if (computedHash.SequenceEqual(Convert.FromHexString(hash)))
                 return new(fields);
         }
-        throw new SecurityException("Invalid data hash");
+        throw new SecurityException("Invalid data hash!");
     }
 }

@@ -173,7 +173,7 @@ namespace BaleBot.Net
         {
             app.MapGet(
                 validatePath + "/{initData}",
-                (BaleBotClient bot, string initData) => bot.ValidateMiniAppInitData(initData)
+                (BaleBotClient bot, string initData) => bot.ValidateMiniAppInitData(initData, 10)
             );
 
             return app;
