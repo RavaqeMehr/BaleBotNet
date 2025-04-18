@@ -14,7 +14,7 @@
     <PackageTags>Bale;Bot;Messenger;BaleBot</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright © BaleBot.Net 2025</Copyright>
-    <PackageProjectUrl>https://github.com/RavaqeMehr/BaleBot.Net</PackageProjectUrl>
+    <PackageProjectUrl>https://ble.ir/BaleBotNet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/RavaqeMehr/BaleBot.Net</RepositoryUrl>
     <Description>
       This client library enables working with the Bale Messenger API, allowing developers to easily integrate with the messaging platform. It provides a simple and efficient way to send and receive messages, manage contacts, and perform other operations within the Bale Messenger ecosystem.
