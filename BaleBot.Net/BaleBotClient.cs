@@ -4,7 +4,7 @@ using BaleBot.Net.Types;
 
 namespace BaleBot.Net;
 
-public class BaleBotClient(string token, int timeout = 60)
+public partial class BaleBotClient(string token, int timeout = 60)
 {
     public readonly string Token = token;
 
