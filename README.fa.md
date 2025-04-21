@@ -4,6 +4,9 @@
 
 یک کتابخانه دات نت برای ارتباط با API ربات پیام‌رسان بله.
 
+
+[در کانال ما در بله از آخرین تغییرات مطلع باشید](https://ble.ir/BaleBotNet)
+
 [نصب از نیوگت BaleBot.Net](https://www.nuget.org/packages/BaleBot.Net)
 
 ## نصب

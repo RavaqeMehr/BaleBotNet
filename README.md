@@ -4,6 +4,9 @@
 
 A .NET library for interacting with the Bale Messenger Bot API.
 
+
+[Subscribe us in Bale](https://ble.ir/BaleBotNet)
+
 [BaleBot.Net Nuget](https://www.nuget.org/packages/BaleBot.Net)
 
 ## Installation
