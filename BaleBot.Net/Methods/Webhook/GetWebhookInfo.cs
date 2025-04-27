@@ -6,7 +6,7 @@ public static partial class Methods
 {
     public static async Task<WebhookInfo> GetWebhookInfo(this BaleBotClient bot)
     {
-        var request = new HttpRequestMessage(HttpMethod.Get, "getWebhookInfo");
+        var request = BotRequest.CreateGet("getWebhookInfo");
 
         return await bot.SendRequest<WebhookInfo>(request);
     }

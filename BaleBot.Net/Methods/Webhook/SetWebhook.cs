@@ -1,15 +1,10 @@
-using System.Net.Http.Json;
-
 namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
     public static async Task<bool> SetWebhook(this BaleBotClient bot, string url)
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "setWebhook")
-        {
-            Content = JsonContent.Create(new { url })
-        };
+        var request = BotRequest.CreatePost("setWebhook", new { url });
 
         return await bot.SendRequest<bool>(request);
     }
