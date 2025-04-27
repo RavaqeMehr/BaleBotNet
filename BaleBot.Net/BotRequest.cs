@@ -11,4 +11,7 @@ public static class BotRequest
         };
 
     public static HttpRequestMessage CreateGet(string path) => new(HttpMethod.Get, path);
+
+    public static HttpRequestMessage CreateForm(string path, MultipartFormDataContent form) =>
+        new(HttpMethod.Post, path) { Content = form };
 }
