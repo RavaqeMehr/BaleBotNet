@@ -1,4 +1,3 @@
-using System.Net.Http.Json;
 using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Methods;
@@ -11,10 +10,7 @@ public static partial class Methods
         int? limit = null
     )
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "getUpdates")
-        {
-            Content = JsonContent.Create(new { offset, limit })
-        };
+        var request = BotRequest.CreatePost("getUpdates", new { offset, limit });
 
         return await bot.SendRequest<Update[]>(request);
     }

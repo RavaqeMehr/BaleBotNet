@@ -8,7 +8,7 @@ public static partial class Methods
         {
             await bot.DeleteWebhook();
         }
-        var request = new HttpRequestMessage(HttpMethod.Get, "close");
+        var request = BotRequest.CreateGet("close");
 
         return await bot.SendRequest<bool>(request);
     }
