@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
@@ -13,7 +14,13 @@ public partial class BaleBotClient(string token, int timeout = 60)
     private readonly HttpClient httpClient = new HttpClient
     {
         BaseAddress = new Uri($"https://tapi.bale.ai/bot{token}/"),
-        DefaultRequestHeaders = { { "User-Agent", "BaleBot.Net" } },
+        DefaultRequestHeaders =
+        {
+            {
+                "User-Agent",
+                $"BaleBot.Net/{Assembly.GetCallingAssembly().GetName().Version?.ToString(3)}"
+            }
+        },
         Timeout = TimeSpan.FromSeconds(timeout)
     };
 
@@ -44,6 +51,9 @@ public partial class BaleBotClient(string token, int timeout = 60)
         var responseString = await response.Content.ReadAsStringAsync();
 
 #if DEBUG
+        Console.WriteLine(
+            $"Headers : {SerializeToJson(response.RequestMessage?.Headers.ToDictionary())}"
+        );
         Console.WriteLine($"Response : ----------------");
         Console.WriteLine(responseString);
         Console.WriteLine("----------------");
