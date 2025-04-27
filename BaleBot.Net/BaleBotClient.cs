@@ -1,5 +1,7 @@
 using System.Net.Http.Json;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Unicode;
 using BaleBot.Net.Types;
 
 namespace BaleBot.Net;
@@ -25,7 +27,10 @@ public partial class BaleBotClient(string token, int timeout = 60)
                 .Json
                 .Serialization
                 .JsonIgnoreCondition
-                .WhenWritingNull
+                .WhenWritingNull,
+            Encoder = JavaScriptEncoder.Create(
+                [UnicodeRanges.BasicLatin, UnicodeRanges.GeneralPunctuation, UnicodeRanges.Arabic]
+            )
         };
 
     internal async Task<T> SendRequest<T>(HttpRequestMessage request)
