@@ -1,4 +1,3 @@
-using System.Net.Http.Json;
 using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Methods;
@@ -12,17 +11,15 @@ public static partial class Methods
         long messageId
     )
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "copyMessage")
-        {
-            Content = JsonContent.Create(
-                new
-                {
-                    chat_id = chatId,
-                    from_chat_id = fromChatId,
-                    message_id = messageId
-                }
-            )
-        };
+        var request = BotRequest.CreatePost(
+            "copyMessage",
+            new
+            {
+                chatId,
+                fromChatId,
+                messageId
+            }
+        );
 
         return await bot.SendRequest<Message>(request);
     }
