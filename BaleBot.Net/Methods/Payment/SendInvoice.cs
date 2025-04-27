@@ -1,4 +1,3 @@
-using System.Net.Http.Json;
 using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Methods;
@@ -17,22 +16,20 @@ public static partial class Methods
         long? replyToMessageId = null
     )
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "sendInvoice")
-        {
-            Content = JsonContent.Create(
-                new
-                {
-                    chat_id = chatId,
-                    title,
-                    description,
-                    payload,
-                    provider_token = providerToken,
-                    prices = BaleBotClient.SerializeToJson(prices),
-                    photo_url = photoUrl,
-                    reply_to_message_id = replyToMessageId
-                }
-            )
-        };
+        var request = BotRequest.CreatePost(
+            "sendInvoice",
+            new
+            {
+                chatId,
+                title,
+                description,
+                payload,
+                providerToken,
+                prices = BaleBotClient.SerializeToJson(prices),
+                photoUrl,
+                replyToMessageId
+            }
+        );
 
         return await bot.SendRequest<Message>(request);
     }

@@ -1,5 +1,3 @@
-using System.Net.Http.Json;
-
 namespace BaleBot.Net.Methods;
 
 public static partial class Methods
@@ -11,17 +9,15 @@ public static partial class Methods
         string? errorMessage
     )
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "answerPreCheckoutQuery")
-        {
-            Content = JsonContent.Create(
-                new
-                {
-                    pre_checkout_query_id = preCheckoutQueryId,
-                    ok,
-                    error_message = errorMessage
-                }
-            )
-        };
+        var request = BotRequest.CreatePost(
+            "answerPreCheckoutQuery",
+            new
+            {
+                preCheckoutQueryId,
+                ok,
+                errorMessage
+            }
+        );
 
         return await bot.SendRequest<bool>(request);
     }
