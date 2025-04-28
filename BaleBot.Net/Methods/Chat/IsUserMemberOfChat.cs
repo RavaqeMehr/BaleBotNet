@@ -1,26 +1,20 @@
+using BaleBot.Net.Types;
+
 namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
     public static async Task<bool> IsUserMemberOfChat(
         this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         long userId
     )
     {
-        if (!chatId.StartsWith('@'))
-        {
-            if (!long.TryParse(chatId, out _))
-            {
-                chatId = $"@{chatId}";
-            }
-        }
-
-        var request = BotRequest.CreatePost("getChatMember", new { chatId, userId });
-
         try
         {
-            _ = await bot.SendRequest<object>(request);
+            _ = await bot.SendRequest<object>(
+                BotRequest.CreatePost("getChatMember", new { chatId, userId })
+            );
             return true;
         }
         catch (Exception)
@@ -28,10 +22,4 @@ public static partial class Methods
             return false;
         }
     }
-
-    public static async Task<bool> IsUserMemberOfChat(
-        this BaleBotClient bot,
-        long chatId,
-        long userId
-    ) => await IsUserMemberOfChat(bot, chatId.ToString(), userId);
 }

@@ -1,4 +1,5 @@
 using BaleBot.Net.Enums;
+using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Methods;
 
@@ -6,20 +7,10 @@ public static partial class Methods
 {
     public static async Task<bool> SendChatAction(
         this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         ChatAction action
-    )
-    {
-        var request = BotRequest.CreateGet(
-            $"sendChatAction?chat_id={chatId}&action={action.Serialize()}"
+    ) =>
+        await bot.SendRequest<bool>(
+            BotRequest.CreateGet($"sendChatAction?chat_id={chatId}&action={action.Serialize()}")
         );
-
-        return await bot.SendRequest<bool>(request);
-    }
-
-    public static async Task<bool> SendChatAction(
-        this BaleBotClient bot,
-        long chatId,
-        ChatAction action
-    ) => await SendChatAction(bot, chatId.ToString(), action);
 }
