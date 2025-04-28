@@ -10,21 +10,17 @@ public static partial class Methods
         string name,
         string title,
         Sticker[] stickers
-    )
-    {
-        var me = await bot.GetMe();
-
-        var request = BotRequest.CreatePost(
-            "createNewStickerSet",
-            new
-            {
-                userId,
-                name = $"{name}_by_{me.Username}",
-                title,
-                sticker = BaleBotClient.SerializeToJson(stickers)
-            }
+    ) =>
+        await bot.SendRequest<bool>(
+            BotRequest.CreatePost(
+                "createNewStickerSet",
+                new
+                {
+                    userId,
+                    name = $"{name}_by_{bot.Me.Username}",
+                    title,
+                    sticker = BaleBotClient.SerializeToJson(stickers)
+                }
+            )
         );
-
-        return await bot.SendRequest<bool>(request);
-    }
 }

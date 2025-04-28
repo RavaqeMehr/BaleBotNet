@@ -9,18 +9,16 @@ public static partial class Methods
         long userId,
         string name,
         Sticker sticker
-    )
-    {
-        var request = BotRequest.CreatePost(
-            "addStickerToSet",
-            new
-            {
-                userId,
-                name,
-                sticker = BaleBotClient.SerializeToJson(sticker)
-            }
+    ) =>
+        await bot.SendRequest<Message>(
+            BotRequest.CreatePost(
+                "addStickerToSet",
+                new
+                {
+                    userId,
+                    name,
+                    sticker = BaleBotClient.SerializeToJson(sticker)
+                }
+            )
         );
-
-        return await bot.SendRequest<Message>(request);
-    }
 }

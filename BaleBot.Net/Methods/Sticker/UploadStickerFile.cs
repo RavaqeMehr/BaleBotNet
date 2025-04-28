@@ -13,15 +13,15 @@ public static partial class Methods
         using FileStream fileStream = new(sticker.FullName, FileMode.Open, FileAccess.Read);
         using var fileContent = new StreamContent(fileStream);
 
-        using var request = BotRequest.CreateForm(
-            "uploadStickerFile",
-            new()
-            {
-                { new StringContent(userId.ToString()), "user_id" },
-                { fileContent, "sticker", Path.GetFileName(sticker.FullName) }
-            }
+        return await bot.SendRequest<Sticker>(
+            BotRequest.CreateForm(
+                "uploadStickerFile",
+                new()
+                {
+                    { new StringContent(userId.ToString()), "user_id" },
+                    { fileContent, "sticker", Path.GetFileName(sticker.FullName) }
+                }
+            )
         );
-
-        return await bot.SendRequest<Sticker>(request);
     }
 }
