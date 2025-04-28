@@ -7,18 +7,16 @@ public static partial class Methods
         string preCheckoutQueryId,
         bool ok,
         string? errorMessage
-    )
-    {
-        var request = BotRequest.CreatePost(
-            "answerPreCheckoutQuery",
-            new
-            {
-                preCheckoutQueryId,
-                ok,
-                errorMessage
-            }
+    ) =>
+        await bot.SendRequest<bool>(
+            BotRequest.CreatePost(
+                "answerPreCheckoutQuery",
+                new
+                {
+                    preCheckoutQueryId,
+                    ok,
+                    errorMessage
+                }
+            )
         );
-
-        return await bot.SendRequest<bool>(request);
-    }
 }
