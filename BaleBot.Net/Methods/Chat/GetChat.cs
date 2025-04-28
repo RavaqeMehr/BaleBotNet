@@ -7,10 +7,7 @@ public static partial class Methods
 {
     public static async Task<Chat> GetChat(this BaleBotClient bot, string chatId)
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "getChat")
-        {
-            Content = JsonContent.Create(new { chat_id = chatId })
-        };
+        var request = BotRequest.CreatePost("getChat", new { chatId });
 
         return await bot.SendRequest<Chat>(request);
     }

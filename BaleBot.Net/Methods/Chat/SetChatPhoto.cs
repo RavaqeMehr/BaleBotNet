@@ -1,6 +1,3 @@
-using System.Net.Http.Headers;
-using System.Net.Mime;
-
 namespace BaleBot.Net.Methods;
 
 public static partial class Methods
@@ -14,19 +11,15 @@ public static partial class Methods
     {
         using FileStream fileStream = new(photo.FullName, FileMode.Open, FileAccess.Read);
         using var fileContent = new StreamContent(fileStream);
-        // fileContent.Headers.ContentType = new MediaTypeHeaderValue(MediaTypeNames.Image.Jpeg);
 
-        using var form = new MultipartFormDataContent
-        {
-            { new StringContent(chatId.ToString()), "chat_id" },
-            // { new StringContent("<attach://photo>"), "photo" },
-            { fileContent, "photo", Path.GetFileName(photo.FullName) }
-        };
-
-        using var request = new HttpRequestMessage(HttpMethod.Post, "setChatPhoto")
-        {
-            Content = form
-        };
+        using var request = BotRequest.CreateForm(
+            "setChatPhoto",
+            new()
+            {
+                { new StringContent(chatId.ToString()), "chat_id" },
+                { fileContent, "photo", Path.GetFileName(photo.FullName) }
+            }
+        );
 
         return await bot.SendRequest<bool>(request);
     }

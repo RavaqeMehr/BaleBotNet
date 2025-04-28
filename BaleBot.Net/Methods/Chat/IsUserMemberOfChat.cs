@@ -1,5 +1,3 @@
-using System.Net.Http.Json;
-
 namespace BaleBot.Net.Methods;
 
 public static partial class Methods
@@ -18,10 +16,7 @@ public static partial class Methods
             }
         }
 
-        var request = new HttpRequestMessage(HttpMethod.Post, "getChatMember")
-        {
-            Content = JsonContent.Create(new { chat_id = chatId, user_id = userId })
-        };
+        var request = BotRequest.CreatePost("getChatMember", new { chatId, userId });
 
         try
         {

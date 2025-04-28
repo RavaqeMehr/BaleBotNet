@@ -1,5 +1,3 @@
-using System.Net.Http.Json;
-
 namespace BaleBot.Net.Methods;
 
 public static partial class Methods
@@ -10,11 +8,7 @@ public static partial class Methods
         string description
     )
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "setChatDescription")
-        {
-            Content = JsonContent.Create(new { chat_id = chatId, description })
-        };
-
+        var request = BotRequest.CreatePost("setChatDescription", new { chatId, description });
         return await bot.SendRequest<bool>(request);
     }
 

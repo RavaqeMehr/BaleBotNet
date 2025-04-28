@@ -1,4 +1,3 @@
-using System.Net.Http.Json;
 using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Methods;
@@ -10,11 +9,7 @@ public static partial class Methods
         string chatId
     )
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "createChatInviteLink")
-        {
-            Content = JsonContent.Create(new { chat_id = chatId })
-        };
-
+        var request = BotRequest.CreatePost("createChatInviteLink", new { chatId });
         return await bot.SendRequest<InviteLinkResponse>(request);
     }
 

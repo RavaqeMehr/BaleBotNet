@@ -10,8 +10,7 @@ public static partial class Methods
         ChatAction action
     )
     {
-        var request = new HttpRequestMessage(
-            HttpMethod.Get,
+        var request = BotRequest.CreateGet(
             $"sendChatAction?chat_id={chatId}&action={action.Serialize()}"
         );
 
