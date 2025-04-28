@@ -53,32 +53,30 @@ public static partial class Methods
     private static async Task<Message> SendFile(
         this BaleBotClient bot,
         SendMethod sendMethod,
-        string chatId,
+        ChatId chatId,
         string fileIdOrUrl,
         string? caption = null,
         long? replyToMessageId = null,
         IReplyMarkup? replyMarkup = null
-    )
-    {
-        Dictionary<string, object?> body =
-            new()
-            {
-                ["chatId"] = chatId,
-                [sendMethod.GetFieldName()] = fileIdOrUrl,
-                ["caption"] = caption,
-                ["replyToMessageId"] = replyToMessageId,
-                ["replyMarkup"] = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
-            };
-
-        var request = BotRequest.CreatePost(sendMethod.GetMethodUrl(), body);
-
-        return await bot.SendRequest<Message>(request);
-    }
+    ) =>
+        await bot.SendRequest<Message>(
+            BotRequest.CreatePost(
+                sendMethod.GetMethodUrl(),
+                new Dictionary<string, object?>
+                {
+                    ["chatId"] = chatId,
+                    [sendMethod.GetFieldName()] = fileIdOrUrl,
+                    ["caption"] = caption,
+                    ["replyToMessageId"] = replyToMessageId,
+                    ["replyMarkup"] = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
+                }
+            )
+        );
 
     private static async Task<Message> SendFile(
         this BaleBotClient bot,
         SendMethod sendMethod,
-        string chatId,
+        ChatId chatId,
         FileInfo fileInfo,
         string? fileName = null,
         string? caption = null,

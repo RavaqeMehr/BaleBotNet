@@ -7,7 +7,7 @@ public static partial class Methods
     #region For Upload
     private static async Task<Message[]> InternalSendMediaGroup(
         this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         InputMediaForUpload[] media,
         long? replyToMessageId = null
     )
@@ -24,82 +24,44 @@ public static partial class Methods
         var mediaJson = BaleBotClient.SerializeToJson(metaDatas)!;
         form.Add(new StringContent(mediaJson), "media");
 
-        using var request = BotRequest.CreateForm("sendMediaGroup", form);
-
-        return await bot.SendRequest<Message[]>(request);
+        return await bot.SendRequest<Message[]>(BotRequest.CreateForm("sendMediaGroup", form));
     }
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         InputMediaPhotoForUpload[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
-        long chatId,
-        InputMediaPhotoForUpload[] media,
-        long? replyToMessageId = null
-    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
-
-    public static async Task<Message[]> SendMediaGroup(
-        this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         InputMediaVideoForUpload[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
-        long chatId,
-        InputMediaVideoForUpload[] media,
-        long? replyToMessageId = null
-    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
-
-    public static async Task<Message[]> SendMediaGroup(
-        this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         InputMediaDocumentForUpload[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
-        long chatId,
-        InputMediaDocumentForUpload[] media,
-        long? replyToMessageId = null
-    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
-
-    public static async Task<Message[]> SendMediaGroup(
-        this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         InputMediaAudioForUpload[] media,
-        long? replyToMessageId = null
-    ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
-
-    public static async Task<Message[]> SendMediaGroup(
-        this BaleBotClient bot,
-        long chatId,
-        InputMediaAudioForUpload[] media,
-        long? replyToMessageId = null
-    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
-
-    [Obsolete("Throws Error: Bale Api not work correctly")]
-    public static async Task<Message[]> SendMediaGroup(
-        this BaleBotClient bot,
-        string chatId,
-        InputMediaAnimationForUpload[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
 
     [Obsolete("Throws Error: Bale Api not work correctly")]
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
-        long chatId,
+        ChatId chatId,
         InputMediaAnimationForUpload[] media,
         long? replyToMessageId = null
-    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
+    ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
 
     #endregion
 
@@ -108,96 +70,58 @@ public static partial class Methods
 
     private static async Task<Message[]> InternalSendMediaGroup(
         this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         InputMediaForFileIdOrUrl[] media,
         long? replyToMessageId = null
-    )
-    {
-        var request = BotRequest.CreatePost(
-            "sendMediaGroup",
-            new
-            {
-                chatId,
-                media,
-                replyToMessageId
-            }
+    ) =>
+        await bot.SendRequest<Message[]>(
+            BotRequest.CreatePost(
+                "sendMediaGroup",
+                new
+                {
+                    chatId,
+                    media,
+                    replyToMessageId
+                }
+            )
         );
 
-        return await bot.SendRequest<Message[]>(request);
-    }
-
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         InputMediaPhotoForFileIdOrUrl[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
-        long chatId,
-        InputMediaPhotoForFileIdOrUrl[] media,
-        long? replyToMessageId = null
-    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
-
-    public static async Task<Message[]> SendMediaGroup(
-        this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         InputMediaVideoForFileIdOrUrl[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
-        long chatId,
-        InputMediaVideoForFileIdOrUrl[] media,
-        long? replyToMessageId = null
-    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
-
-    public static async Task<Message[]> SendMediaGroup(
-        this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         InputMediaDocumentForFileIdOrUrl[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
 
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
-        long chatId,
-        InputMediaDocumentForFileIdOrUrl[] media,
-        long? replyToMessageId = null
-    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
-
-    public static async Task<Message[]> SendMediaGroup(
-        this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         InputMediaAudioForFileIdOrUrl[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
-
-    public static async Task<Message[]> SendMediaGroup(
-        this BaleBotClient bot,
-        long chatId,
-        InputMediaAudioForFileIdOrUrl[] media,
-        long? replyToMessageId = null
-    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
 
     // has error
     [Obsolete("Throws Error: Bale Api not work correctly")]
     public static async Task<Message[]> SendMediaGroup(
         this BaleBotClient bot,
-        string chatId,
+        ChatId chatId,
         InputMediaAnimationForFileIdOrUrl[] media,
         long? replyToMessageId = null
     ) => await bot.InternalSendMediaGroup(chatId, media, replyToMessageId);
-
-    [Obsolete("Throws Error: Bale Api not work correctly")]
-    public static async Task<Message[]> SendMediaGroup(
-        this BaleBotClient bot,
-        long chatId,
-        InputMediaAnimationForFileIdOrUrl[] media,
-        long? replyToMessageId = null
-    ) => await SendMediaGroup(bot, chatId.ToString(), media, replyToMessageId);
 
     #endregion
 }

@@ -4,27 +4,14 @@ namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
-    public static async Task<File> GetFile(this BaleBotClient bot, string fileId)
-    {
-        var request = BotRequest.CreatePost("getFile", new { fileId });
+    public static async Task<File> GetFile(this BaleBotClient bot, string fileId) =>
+        await bot.SendRequest<File>(BotRequest.CreatePost("getFile", new { fileId }));
 
-        return await bot.SendRequest<File>(request);
-    }
+    public static async Task<Stream?> Download(this BaleBotClient bot, string fileId) =>
+        await bot.StreamDownloader(File.GetFileUrl(bot, fileId));
 
-    public static async Task<Stream?> Download(this BaleBotClient bot, string fileId)
-    {
-        return await bot.StreamDownloader(File.GetFileUrl(bot, fileId));
-    }
-
-    public static async Task<Stream?> Download(this BaleBotClient bot, File file)
-    {
-        if (file.FileUrl(bot) is string url)
-        {
-            return await bot.StreamDownloader(url);
-        }
-
-        return null;
-    }
+    public static async Task<Stream?> Download(this BaleBotClient bot, File file) =>
+        file.FileUrl(bot) is string url ? await bot.StreamDownloader(url) : null;
 
     public static async Task<bool> Download(
         this BaleBotClient bot,
