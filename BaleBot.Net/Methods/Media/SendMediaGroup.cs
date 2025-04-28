@@ -1,4 +1,3 @@
-using System.Net.Http.Json;
 using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Methods;
@@ -13,28 +12,19 @@ public static partial class Methods
         long? replyToMessageId = null
     )
     {
-        (
-            MultipartFormDataContent multipartFormDataContent,
-            InputMediaForUploadMetaData[] metaDatas
-        ) = media.GetMultipartFormDataContentAndMetaDatas();
+        var (form, metaDatas) = media.GetMultipartFormDataContentAndMetaDatas();
 
-        multipartFormDataContent.Add(new StringContent(chatId.ToString()), "chat_id");
+        form.Add(new StringContent(chatId.ToString()), "chat_id");
 
         if (replyToMessageId is long replyId)
         {
-            multipartFormDataContent.Add(
-                new StringContent(replyId.ToString()),
-                "reply_to_message_id"
-            );
+            form.Add(new StringContent(replyId.ToString()), "reply_to_message_id");
         }
 
         var mediaJson = BaleBotClient.SerializeToJson(metaDatas)!;
-        multipartFormDataContent.Add(new StringContent(mediaJson), "media");
+        form.Add(new StringContent(mediaJson), "media");
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, "sendMediaGroup")
-        {
-            Content = multipartFormDataContent
-        };
+        using var request = BotRequest.CreateForm("sendMediaGroup", form);
 
         return await bot.SendRequest<Message[]>(request);
     }
@@ -123,17 +113,15 @@ public static partial class Methods
         long? replyToMessageId = null
     )
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "sendMediaGroup")
-        {
-            Content = JsonContent.Create(
-                new
-                {
-                    chat_id = chatId,
-                    media,
-                    reply_to_message_id = replyToMessageId
-                }
-            )
-        };
+        var request = BotRequest.CreatePost(
+            "sendMediaGroup",
+            new
+            {
+                chatId,
+                media,
+                replyToMessageId
+            }
+        );
 
         return await bot.SendRequest<Message[]>(request);
     }

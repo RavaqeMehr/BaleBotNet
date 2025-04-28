@@ -1,4 +1,3 @@
-using System.Net.Http.Json;
 using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Methods;
@@ -15,20 +14,18 @@ public static partial class Methods
         IReplyMarkup? replyMarkup = null
     )
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "sendContact")
-        {
-            Content = JsonContent.Create(
-                new
-                {
-                    chat_id = chatId,
-                    phone_number = phoneNumber,
-                    first_name = firstName,
-                    last_name = lastName,
-                    reply_to_message_id = replyToMessageId,
-                    reply_markup = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
-                }
-            )
-        };
+        var request = BotRequest.CreatePost(
+            "sendContact",
+            new
+            {
+                chatId,
+                phoneNumber,
+                firstName,
+                lastName,
+                replyToMessageId,
+                replyMarkup = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
+            }
+        );
 
         return await bot.SendRequest<Message>(request);
     }

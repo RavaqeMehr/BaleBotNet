@@ -1,5 +1,4 @@
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Methods;
@@ -64,17 +63,14 @@ public static partial class Methods
         Dictionary<string, object?> body =
             new()
             {
-                ["chat_id"] = chatId,
+                ["chatId"] = chatId,
                 [sendMethod.GetFieldName()] = fileIdOrUrl,
                 ["caption"] = caption,
-                ["reply_to_message_id"] = replyToMessageId,
-                ["reply_markup"] = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
+                ["replyToMessageId"] = replyToMessageId,
+                ["replyMarkup"] = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
             };
 
-        var request = new HttpRequestMessage(HttpMethod.Post, sendMethod.GetMethodUrl())
-        {
-            Content = JsonContent.Create(body)
-        };
+        var request = BotRequest.CreatePost(sendMethod.GetMethodUrl(), body);
 
         return await bot.SendRequest<Message>(request);
     }
@@ -94,7 +90,7 @@ public static partial class Methods
         using var fileContent = new StreamContent(fileStream);
         fileContent.Headers.ContentType = sendMethod.GetContentType();
 
-        using var content = new MultipartFormDataContent
+        using var form = new MultipartFormDataContent
         {
             { new StringContent(chatId.ToString()), "chat_id" },
             { fileContent, sendMethod.GetFieldName(), fileName ?? fileInfo.Name }
@@ -102,26 +98,23 @@ public static partial class Methods
 
         if (!string.IsNullOrEmpty(caption))
         {
-            content.Add(new StringContent(caption), "caption");
+            form.Add(new StringContent(caption), "caption");
         }
 
         if (replyToMessageId is long replyId)
         {
-            content.Add(new StringContent(replyId.ToString()), "reply_to_message_id");
+            form.Add(new StringContent(replyId.ToString()), "reply_to_message_id");
         }
 
         if (replyMarkup != null)
         {
-            content.Add(
+            form.Add(
                 new StringContent(replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"),
                 "reply_markup"
             );
         }
 
-        using var request = new HttpRequestMessage(HttpMethod.Post, sendMethod.GetMethodUrl())
-        {
-            Content = content
-        };
+        using var request = BotRequest.CreateForm(sendMethod.GetMethodUrl(), form);
 
         return await bot.SendRequest<Message>(request);
     }

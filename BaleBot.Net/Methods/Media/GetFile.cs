@@ -1,4 +1,3 @@
-using System.Net.Http.Json;
 using File = BaleBot.Net.Types.File;
 
 namespace BaleBot.Net.Methods;
@@ -7,10 +6,7 @@ public static partial class Methods
 {
     public static async Task<File> GetFile(this BaleBotClient bot, string fileId)
     {
-        var request = new HttpRequestMessage(HttpMethod.Post, "getFile")
-        {
-            Content = JsonContent.Create(new { file_id = fileId })
-        };
+        var request = BotRequest.CreatePost("getFile", new { fileId });
 
         return await bot.SendRequest<File>(request);
     }
