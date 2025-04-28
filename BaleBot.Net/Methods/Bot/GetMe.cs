@@ -4,10 +4,6 @@ namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
-    public static async Task<User> GetMe(this BaleBotClient bot)
-    {
-        var request = BotRequest.CreateGet("getme");
-
-        return await bot.SendRequest<User>(request);
-    }
+    public static async Task<User> GetMe(this BaleBotClient bot) =>
+        await bot.SendRequest<User>(BotRequest.CreateGet("getme"));
 }

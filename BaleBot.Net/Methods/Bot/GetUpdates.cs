@@ -8,10 +8,6 @@ public static partial class Methods
         this BaleBotClient bot,
         int? offset = null,
         int? limit = null
-    )
-    {
-        var request = BotRequest.CreatePost("getUpdates", new { offset, limit });
-
-        return await bot.SendRequest<Update[]>(request);
-    }
+    ) =>
+        await bot.SendRequest<Update[]>(BotRequest.CreatePost("getUpdates", new { offset, limit }));
 }
