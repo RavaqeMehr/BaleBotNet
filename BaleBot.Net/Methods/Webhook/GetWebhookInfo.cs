@@ -4,10 +4,6 @@ namespace BaleBot.Net.Methods;
 
 public static partial class Methods
 {
-    public static async Task<WebhookInfo> GetWebhookInfo(this BaleBotClient bot)
-    {
-        var request = BotRequest.CreateGet("getWebhookInfo");
-
-        return await bot.SendRequest<WebhookInfo>(request);
-    }
+    public static async Task<WebhookInfo> GetWebhookInfo(this BaleBotClient bot) =>
+        await bot.SendRequest<WebhookInfo>(BotRequest.CreateGet("getWebhookInfo"));
 }
