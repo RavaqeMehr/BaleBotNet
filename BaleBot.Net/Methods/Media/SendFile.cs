@@ -91,9 +91,13 @@ public static partial class Methods
         using var form = new MultipartFormDataContent
         {
             { new StringContent(chatId.ToString()), "chat_id" },
-            { fileContent, sendMethod.GetFieldName(), fileName ?? fileInfo.Name },
-            { new StringContent(replyMarkup.ToStringOrClear()), "reply_markup" }
+            { fileContent, sendMethod.GetFieldName(), fileName ?? fileInfo.Name }
         };
+
+        if (replyMarkup is not null)
+        {
+            form.Add(new StringContent(replyMarkup.ToString()), "reply_markup");
+        }
 
         if (!string.IsNullOrEmpty(caption))
         {

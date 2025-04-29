@@ -1,6 +1,9 @@
 namespace BaleBot.Net.Types;
 
-public interface IReplyMarkup { }
+public interface IReplyMarkup
+{
+    string ToString();
+}
 
 public static class ReplyKeyboard
 {
