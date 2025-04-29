@@ -23,7 +23,7 @@ public static partial class Methods
                     firstName,
                     lastName,
                     replyToMessageId,
-                    replyMarkup = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
+                    replyMarkup
                 }
             )
         );

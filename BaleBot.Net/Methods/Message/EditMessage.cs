@@ -19,7 +19,7 @@ public static partial class Methods
                     chatId,
                     messageId,
                     text,
-                    replyMarkup = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
+                    replyMarkup
                 }
             )
         );

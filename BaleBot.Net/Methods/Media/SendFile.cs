@@ -68,7 +68,7 @@ public static partial class Methods
                     [sendMethod.GetFieldName()] = fileIdOrUrl,
                     ["caption"] = caption,
                     ["replyToMessageId"] = replyToMessageId,
-                    ["replyMarkup"] = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
+                    ["replyMarkup"] = replyMarkup
                 }
             )
         );
@@ -91,7 +91,8 @@ public static partial class Methods
         using var form = new MultipartFormDataContent
         {
             { new StringContent(chatId.ToString()), "chat_id" },
-            { fileContent, sendMethod.GetFieldName(), fileName ?? fileInfo.Name }
+            { fileContent, sendMethod.GetFieldName(), fileName ?? fileInfo.Name },
+            { new StringContent(replyMarkup.ToStringOrClear()), "reply_markup" }
         };
 
         if (!string.IsNullOrEmpty(caption))
@@ -102,14 +103,6 @@ public static partial class Methods
         if (replyToMessageId is long replyId)
         {
             form.Add(new StringContent(replyId.ToString()), "reply_to_message_id");
-        }
-
-        if (replyMarkup != null)
-        {
-            form.Add(
-                new StringContent(replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"),
-                "reply_markup"
-            );
         }
 
         using var request = BotRequest.CreateForm(sendMethod.GetMethodUrl(), form);

@@ -4,5 +4,5 @@ public class InlineKeyboardMarkup : IReplyMarkup
 {
     public InlineKeyboardButton[][] InlineKeyboard { get; set; } = default!;
 
-    public string? Serialize() => BaleBotClient.SerializeToJson(this);
+    public override string ToString() => BaleBotClient.SerializeToJson(this)!;
 }

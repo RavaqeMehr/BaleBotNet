@@ -23,7 +23,7 @@ public static partial class Methods
                     longitude,
                     horizontalAccuracy,
                     replyToMessageId,
-                    replyMarkup = replyMarkup?.Serialize() ?? "{\"keyboard\":\"[[]]\"}"
+                    replyMarkup
                 }
             )
         );
