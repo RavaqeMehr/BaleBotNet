@@ -13,6 +13,7 @@ public class Message
     public Message? ReplyToMessage { get; set; }
     public int? EditDate { get; set; }
     public string? Text { get; set; }
+    public MessageEntity[]? Entities { get; set; }
     public Animation? Animation { get; set; }
     public Audio? Audio { get; set; }
     public Document? Document { get; set; }
@@ -21,6 +22,7 @@ public class Message
     public Video? Video { get; set; }
     public Voice? Voice { get; set; }
     public string? Caption { get; set; }
+    public MessageEntity[]? CaptionEntities { get; set; }
     public Contact? Contact { get; set; }
     public Location? Location { get; set; }
     public User[]? NewChatMembers { get; set; }
