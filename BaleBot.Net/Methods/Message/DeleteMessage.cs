@@ -13,3 +13,9 @@ public static partial class Methods
             BotRequest.CreatePost("deleteMessage", new { chatId, messageId })
         );
 }
+
+public static partial class MessageExtentions
+{
+    public static async Task<bool> Delete(this Message message, BaleBotClient bot) =>
+        await bot.DeleteMessage(message.Chat.Id, message.MessageId);
+}

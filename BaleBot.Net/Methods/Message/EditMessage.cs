@@ -24,3 +24,13 @@ public static partial class Methods
             )
         );
 }
+
+public static partial class MessageExtentions
+{
+    public static async Task<Message> Edit(
+        this Message message,
+        BaleBotClient bot,
+        string text,
+        IReplyMarkup? replyMarkup = null
+    ) => await bot.EditMessage(message.Chat.Id, message.MessageId, text, replyMarkup);
+}
