@@ -1,9 +1,11 @@
+using BaleBot.Net.Enums;
+
 namespace BaleBot.Net.Types;
 
 public class Chat
 {
     public long Id { get; set; }
-    public string Type { get; set; } = default!;
+    public ChatType Type { get; set; }
     public string? Title { get; set; }
     public string? Username { get; set; }
     public string? FirstName { get; set; }

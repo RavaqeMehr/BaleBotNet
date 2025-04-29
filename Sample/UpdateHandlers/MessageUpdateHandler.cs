@@ -13,7 +13,7 @@ public class MessageUpdateHandler(BaleBotClient bot) : IMessageUpdateHandler
         CancellationToken cancellationToken = default
     )
     {
-        if (message.Chat.GetChatType() is not ChatType.Private)
+        if (message.Chat.Type is not ChatType.Private)
         {
             return;
         }
