@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.Unicode;
 using BaleBot.Net.Types;
 
@@ -36,7 +37,8 @@ public partial class BaleBotClient(string token, int timeout = 60)
                 .WhenWritingNull,
             Encoder = JavaScriptEncoder.Create(
                 [UnicodeRanges.BasicLatin, UnicodeRanges.GeneralPunctuation, UnicodeRanges.Arabic]
-            )
+            ),
+            Converters = { new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower) }
         };
 
     internal async Task<T> SendRequest<T>(HttpRequestMessage request)

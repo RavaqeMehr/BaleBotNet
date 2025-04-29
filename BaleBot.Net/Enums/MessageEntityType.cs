@@ -1,7 +1,9 @@
+using System.Text.Json.Serialization;
 using BaleBot.Net.Types;
 
 namespace BaleBot.Net.Enums;
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum MessageEntityType
 {
     /// <summary>A mentioned <see cref="User"/></summary>
