@@ -14,7 +14,6 @@ var env =
 
 var bot = builder.Services.AddBaleBotClient(env.Token);
 
-
 #region Updates
 
 // For Handling Updates Use This:
@@ -26,7 +25,7 @@ var bot = builder.Services.AddBaleBotClient(env.Token);
 // builder.Services.AddScoped<ICallbackQueryUpdateHandler, CallbackQueryUpdateHandler>();
 // builder.Services.AddScoped<IPreCheckoutQueryUpdateHandler, PreCheckoutQueryUpdateHandler>();
 
-// var app = builder.Build();
+var app = builder.Build();
 
 // For Handling Updates Use This for webhook:
 // app.MapBaleBotWebhookWithSepratedHandleres(env.AppBaseUrl);
@@ -42,7 +41,7 @@ var bot = builder.Services.AddBaleBotClient(env.Token);
 //         {
 //             var updates = await bot.GetUpdates(offset, 10);
 //             Console.WriteLine("========================================");
-//             Console.WriteLine($"Updates: {updates?.Count() ?? 0}");
+//             Console.WriteLine($"Updates: {updates?.Length ?? 0}");
 //             await Task.Delay(1000);
 
 //             List<Task>? tasks = updates
@@ -124,6 +123,40 @@ var bot = builder.Services.AddBaleBotClient(env.Token);
 //     app.Lifetime.ApplicationStopping
 // );
 
-// app.Run();
+// simple use for saving updates for tests
+Directory.CreateDirectory("updates");
+await Task.Run(
+    async () =>
+    {
+        int? offset = null;
+        do
+        {
+            var updates = await bot.GetUpdates(offset, 1);
+            Console.WriteLine("========================================");
+            Console.WriteLine($"Updates: {updates?.Length ?? 0}");
+
+            if (updates != null && updates.Length > 0)
+            {
+                foreach (var update in updates)
+                {
+                    await System.IO.File.WriteAllTextAsync(
+                        $"updates/{update.UpdateId}.json",
+                        BaleBotClient.SerializeToJson(update)
+                    );
+                }
+
+                offset = updates?.Last().UpdateId + 1;
+            }
+
+            await Task.Delay(500);
+        } while (app.Lifetime.ApplicationStopping.IsCancellationRequested == false);
+    },
+    app.Lifetime.ApplicationStopping
+);
 
 #endregion
+
+
+
+
+app.Run();
