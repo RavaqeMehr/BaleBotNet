@@ -64,11 +64,11 @@ public static partial class Methods
                 sendMethod.GetMethodUrl(),
                 new Dictionary<string, object?>
                 {
-                    ["chatId"] = chatId,
+                    ["chat_id"] = chatId,
                     [sendMethod.GetFieldName()] = fileIdOrUrl,
                     ["caption"] = caption,
-                    ["replyToMessageId"] = replyToMessageId,
-                    ["replyMarkup"] = replyMarkup
+                    ["reply_to_message_id"] = replyToMessageId,
+                    ["reply_markup"] = replyMarkup
                 }
             )
         );
