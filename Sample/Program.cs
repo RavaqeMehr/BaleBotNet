@@ -166,4 +166,5 @@ var app = builder.Build();
 
 ShortSamples samples = new(bot);
 
+await samples.SendChatAction(env.TestChatId);
 await samples.RequestContact(env.TestChatId);
