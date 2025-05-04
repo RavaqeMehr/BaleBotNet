@@ -31,7 +31,7 @@ public static partial class Methods
         IReplyMarkup? replyMarkup = null
     ) =>
         await bot.SendFile(
-            SendMethod.SendAudio,
+            SendMethod.SendDocument,
             chatId,
             fileInfo,
             fileName,
