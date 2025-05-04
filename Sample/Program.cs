@@ -169,3 +169,4 @@ ShortSamples samples = new(bot);
 await samples.SendChatAction(env.TestChatId);
 await samples.RequestContact(env.TestChatId);
 await samples.InlineButtons(env.TestChatId);
+await samples.SendPhoto(env.TestChatId);
