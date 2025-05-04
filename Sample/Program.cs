@@ -4,6 +4,7 @@ using System.Text.Json;
 using BaleBot.Net;
 using BaleBot.Net.Methods;
 using BaleBot.Net.Types;
+using Sample;
 using Sample.UpdateHandlers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -124,39 +125,45 @@ var app = builder.Build();
 // );
 
 // simple use for saving updates for tests
-Directory.CreateDirectory("updates");
-await Task.Run(
-    async () =>
-    {
-        int? offset = null;
-        do
-        {
-            var updates = await bot.GetUpdates(offset, 1);
-            Console.WriteLine("========================================");
-            Console.WriteLine($"Updates: {updates?.Length ?? 0}");
+// Directory.CreateDirectory("updates");
+// await Task.Run(
+//     async () =>
+//     {
+//         int? offset = null;
+//         do
+//         {
+//             var updates = await bot.GetUpdates(offset, 1);
+//             Console.WriteLine("========================================");
+//             Console.WriteLine($"Updates: {updates?.Length ?? 0}");
 
-            if (updates != null && updates.Length > 0)
-            {
-                foreach (var update in updates)
-                {
-                    await System.IO.File.WriteAllTextAsync(
-                        $"updates/{update.UpdateId}.json",
-                        BaleBotClient.SerializeToJson(update)
-                    );
-                }
+//             if (updates != null && updates.Length > 0)
+//             {
+//                 foreach (var update in updates)
+//                 {
+//                     await System.IO.File.WriteAllTextAsync(
+//                         $"updates/{update.UpdateId}.json",
+//                         BaleBotClient.SerializeToJson(update)
+//                     );
+//                 }
 
-                offset = updates?.Last().UpdateId + 1;
-            }
+//                 offset = updates?.Last().UpdateId + 1;
+//             }
 
-            await Task.Delay(500);
-        } while (app.Lifetime.ApplicationStopping.IsCancellationRequested == false);
-    },
-    app.Lifetime.ApplicationStopping
-);
+//             await Task.Delay(500);
+//         } while (app.Lifetime.ApplicationStopping.IsCancellationRequested == false);
+//     },
+//     app.Lifetime.ApplicationStopping
+// );
 
 #endregion
 
 
 
 
-app.Run();
+
+// app.Run();
+
+
+ShortSamples samples = new(bot);
+
+await samples.RequestContact(env.TestChatId);
