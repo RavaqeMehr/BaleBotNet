@@ -166,7 +166,20 @@ var app = builder.Build();
 
 ShortSamples samples = new(bot);
 
-await samples.SendChatAction(env.TestChatId);
-await samples.RequestContact(env.TestChatId);
-await samples.InlineButtons(env.TestChatId);
-await samples.SendPhoto(env.TestChatId);
+CancellationTokenSource cancellationTokenSource = new(TimeSpan.FromMinutes(1));
+Task.Run(
+    () =>
+        samples.GetUpdates(
+            (update) =>
+            {
+                Console.WriteLine($"Update Recived: {update.UpdateId}");
+                return Task.CompletedTask;
+            },
+            cancellationTokenSource.Token // run just 1 min
+        )
+);
+
+// await samples.SendChatAction(env.TestChatId);
+// await samples.RequestContact(env.TestChatId);
+// await samples.InlineButtons(env.TestChatId);
+// await samples.SendPhoto(env.TestChatId);
