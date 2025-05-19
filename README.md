@@ -1,26 +1,25 @@
 [این را به فارسی بخوانید (Persian)](README.fa.md)
 
-# BaleBot.Net
+# BaleBotNet
 
 A .NET library for interacting with the Bale Messenger Bot API.
 
-
 [Subscribe us in Bale](https://ble.ir/BaleBotNet)
 
-[BaleBot.Net Nuget](https://www.nuget.org/packages/BaleBot.Net)
+[BaleBotNet Nuget](https://www.nuget.org/packages/BaleBotNet)
 
 ## Installation
 
-To use `BaleBot.Net` in your project, add the NuGet package:
+To use `BaleBotNet` in your project, add the NuGet package:
 
 ```bash
-dotnet add package BaleBot.Net
+dotnet add package BaleBotNet
 ```
 
 Or, in the NuGet Package Manager Console:
 
 ```bash
-Install-Package BaleBot.Net
+Install-Package BaleBotNet
 ```
 
 ## Usage in ASP.NET Core Projects
@@ -128,4 +127,4 @@ message = await bot.SendMessage(
 Console.WriteLine($"Message Sent: {message.MessageId}");
 ```
 
-There are lot of Samples at [Sample Project](https://github.com/RavaqeMehr/BaleBot.Net/blob/main/Sample/Program.cs)
+There are lot of Samples at [Sample Project](https://github.com/RavaqeMehr/BaleBotNet/blob/main/Sample/Program.cs)

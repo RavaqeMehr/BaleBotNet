@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageId>BaleBotNet</PackageId>
+    <Version>2.0.0</Version>
+    <Authors>Moqavem</Authors>
+    <Company>RavaqeMehr</Company>
+    <Product>BaleBotNet</Product>
+    <PackRelease>true</PackRelease>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>Bale;Bot;Messenger;BaleBot</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright © BaleBotNet 2025</Copyright>
+    <PackageProjectUrl>https://ble.ir/BaleBotNet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/RavaqeMehr/BaleBotNet</RepositoryUrl>
+    <Description>
+      This client library enables working with the Bale Messenger API, allowing developers to easily integrate with the messaging platform. It provides a simple and efficient way to send and receive messages, manage contacts, and perform other operations within the Bale Messenger ecosystem.
+      The library is designed to be user-friendly and efficient, making it easy for developers to get started with the Bale Messenger API. It abstracts away the complexities of the underlying API, allowing developers to focus on building their applications without worrying about the details of the API implementation.
+      Official docs for the API can be found at: https://docs.bale.ai
+    </Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>bale.png</PackageIcon>
+  </PropertyGroup>
+
+   <ItemGroup>
+    <None Include="../bale.png" Pack="true" PackagePath="/" />
+    <None Include="../README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+</Project>

@@ -1,9 +1,9 @@
 // OLD SAMPLES ARE IN PROGRAM.CS.OLD
 
 using System.Text.Json;
-using BaleBot.Net;
-using BaleBot.Net.Methods;
-using BaleBot.Net.Types;
+using BaleBotNet;
+using BaleBotNet.Methods;
+using BaleBotNet.Types;
 using Sample;
 using Sample.UpdateHandlers;
 

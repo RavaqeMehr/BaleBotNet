@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
-using BaleBot.Net;
-using BaleBot.Net.Methods;
-using BaleBot.Net.Types;
+using BaleBotNet;
+using BaleBotNet.Methods;
+using BaleBotNet.Types;
 
 var env =
     JsonSerializer.Deserialize<Env>(await System.IO.File.ReadAllTextAsync("env.json"))

@@ -1,5 +1,5 @@
-using BaleBot.Net;
-using BaleBot.Net.Types;
+using BaleBotNet;
+using BaleBotNet.Types;
 
 namespace Sample.UpdateHandlers;
 

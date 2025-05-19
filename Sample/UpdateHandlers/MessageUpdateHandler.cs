@@ -1,7 +1,7 @@
-using BaleBot.Net;
-using BaleBot.Net.Enums;
-using BaleBot.Net.Methods;
-using BaleBot.Net.Types;
+using BaleBotNet;
+using BaleBotNet.Enums;
+using BaleBotNet.Methods;
+using BaleBotNet.Types;
 
 namespace Sample.UpdateHandlers;
 

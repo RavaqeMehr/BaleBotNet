@@ -1,5 +1,5 @@
-using BaleBot.Net.Enums;
-using BaleBot.Net.Methods;
+using BaleBotNet.Enums;
+using BaleBotNet.Methods;
 
 namespace Sample;
 

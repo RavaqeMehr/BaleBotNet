@@ -1,4 +1,4 @@
-using BaleBot.Net.Methods;
+using BaleBotNet.Methods;
 
 namespace Sample;
 

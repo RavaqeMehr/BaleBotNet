@@ -1,26 +1,25 @@
 [(English) Read this in English](README.md)
 
-# BaleBot.Net
+# BaleBotNet
 
 یک کتابخانه دات نت برای ارتباط با API ربات پیام‌رسان بله.
 
-
 [در کانال ما در بله از آخرین تغییرات مطلع باشید](https://ble.ir/BaleBotNet)
 
-[نصب از نیوگت BaleBot.Net](https://www.nuget.org/packages/BaleBot.Net)
+[نصب از نیوگت BaleBotNet](https://www.nuget.org/packages/BaleBotNet)
 
 ## نصب
 
-برای استفاده از `BaleBot.Net` در پروژه خود، بسته نیوگت را اضافه کنید:
+برای استفاده از `BaleBotNet` در پروژه خود، بسته نیوگت را اضافه کنید:
 
 ```bash
-dotnet add package BaleBot.Net
+dotnet add package BaleBotNet
 ```
 
 یا در کنسول مدیریت بسته نیوگت:
 
 ```bash
-Install-Package BaleBot.Net
+Install-Package BaleBotNet
 ```
 
 ## استفاده در پروژه‌های ASP.NET Core
@@ -128,4 +127,4 @@ message = await bot.SendMessage(
 Console.WriteLine($"پیام ارسال شد: {message.MessageId}");
 ```
 
-نمونه‌های بیشتر در [پروژه نمونه](https://github.com/RavaqeMehr/BaleBot.Net/blob/main/Sample/Program.cs) موجود است
+نمونه‌های بیشتر در [پروژه نمونه](https://github.com/RavaqeMehr/BaleBotNet/blob/main/Sample/Program.cs) موجود است

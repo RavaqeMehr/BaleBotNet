@@ -1,4 +1,4 @@
-using BaleBot.Net;
+using BaleBotNet;
 
 namespace Sample;
 
