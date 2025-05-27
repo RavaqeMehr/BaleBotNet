@@ -25,7 +25,7 @@ public static partial class Methods
                     description,
                     payload,
                     providerToken,
-                    prices = BaleBotClient.SerializeToJson(prices),
+                    prices,
                     photoUrl,
                     replyToMessageId
                 }
