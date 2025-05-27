@@ -124,62 +124,66 @@ var app = builder.Build();
 //     app.Lifetime.ApplicationStopping
 // );
 
-// simple use for saving updates for tests
-// Directory.CreateDirectory("updates");
-// await Task.Run(
-//     async () =>
-//     {
-//         int? offset = null;
-//         do
-//         {
-//             var updates = await bot.GetUpdates(offset, 1);
-//             Console.WriteLine("========================================");
-//             Console.WriteLine($"Updates: {updates?.Length ?? 0}");
-
-//             if (updates != null && updates.Length > 0)
-//             {
-//                 foreach (var update in updates)
-//                 {
-//                     await System.IO.File.WriteAllTextAsync(
-//                         $"updates/{update.UpdateId}.json",
-//                         BaleBotClient.SerializeToJson(update)
-//                     );
-//                 }
-
-//                 offset = updates?.Last().UpdateId + 1;
-//             }
-
-//             await Task.Delay(500);
-//         } while (app.Lifetime.ApplicationStopping.IsCancellationRequested == false);
-//     },
-//     app.Lifetime.ApplicationStopping
-// );
-
 #endregion
-
-
 
 
 
 // app.Run();
 
 
+
 ShortSamples samples = new(bot);
 
-CancellationTokenSource cancellationTokenSource = new(TimeSpan.FromMinutes(1));
-Task.Run(
-    () =>
-        samples.GetUpdates(
-            (update) =>
-            {
-                Console.WriteLine($"Update Recived: {update.UpdateId}");
-                return Task.CompletedTask;
-            },
-            cancellationTokenSource.Token // run just 1 min
-        )
-);
+// await samples.SendInvoice(env.TestChatId);
+await samples.InquireTransaction("");
 
 // await samples.SendChatAction(env.TestChatId);
 // await samples.RequestContact(env.TestChatId);
 // await samples.InlineButtons(env.TestChatId);
 // await samples.SendPhoto(env.TestChatId);
+
+
+// simple use for saving updates for tests
+Directory.CreateDirectory("updates");
+await Task.Run(
+    async () =>
+    {
+        int? offset = null;
+        do
+        {
+            var updates = await bot.GetUpdates(offset, 10);
+            Console.WriteLine("========================================");
+            Console.WriteLine($"Updates: {updates?.Length ?? 0}");
+
+            if (updates != null && updates.Length > 0)
+            {
+                foreach (var update in updates)
+                {
+                    await System.IO.File.WriteAllTextAsync(
+                        $"updates/{update.UpdateId}.json",
+                        BaleBotClient.SerializeToJson(update, true)
+                    );
+
+                    if (update.PreCheckoutQuery is PreCheckoutQuery preCheckoutQuery)
+                    {
+                        try
+                        {
+                            await bot.AnswerPreCheckoutQuery(preCheckoutQuery.Id, true); // تایید پرداخت
+                            await bot.AnswerPreCheckoutQuery(
+                                preCheckoutQuery.Id,
+                                false,
+                                "موجودی این محصول به اتمام رسید!"
+                            ); // عدم تایید پرداخت
+                        }
+                        catch { }
+                    }
+                }
+
+                offset = updates?.Last().UpdateId + 1;
+            }
+
+            await Task.Delay(500);
+        } while (app.Lifetime.ApplicationStopping.IsCancellationRequested == false);
+    },
+    app.Lifetime.ApplicationStopping
+);
