@@ -6,7 +6,7 @@ public static partial class Methods
         this BaleBotClient bot,
         string preCheckoutQueryId,
         bool ok,
-        string? errorMessage
+        string? errorMessage = null
     ) =>
         await bot.SendRequest<bool>(
             BotRequest.CreatePost(
