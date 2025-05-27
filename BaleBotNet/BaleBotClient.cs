@@ -29,17 +29,15 @@ public partial class BaleBotClient(string token, int timeout = 60)
         {
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-            DefaultIgnoreCondition = System
-                .Text
-                .Json
-                .Serialization
-                .JsonIgnoreCondition
-                .WhenWritingNull,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
             Encoder = JavaScriptEncoder.Create(
                 [UnicodeRanges.BasicLatin, UnicodeRanges.GeneralPunctuation, UnicodeRanges.Arabic]
             ),
             Converters = { new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower) }
         };
+
+    public static readonly JsonSerializerOptions jsonOptionIndented =
+        new(jsonOption) { WriteIndented = true };
 
     internal async Task<T> SendRequest<T>(HttpRequestMessage request)
     {
@@ -101,10 +99,12 @@ public partial class BaleBotClient(string token, int timeout = 60)
         return await httpClient.GetStreamAsync(fileUrl);
     }
 
-    public static string? SerializeToJson<T>(T? obj)
+    public static string? SerializeToJson<T>(T? obj, bool indented = false)
     {
         if (obj == null)
             return null;
+        if (indented)
+            return JsonSerializer.Serialize(obj, jsonOptionIndented);
         return JsonSerializer.Serialize(obj, jsonOption);
     }
 
