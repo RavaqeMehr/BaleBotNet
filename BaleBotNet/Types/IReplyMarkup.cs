@@ -43,12 +43,7 @@ public class ReplyMarkupConverter : JsonConverter<IReplyMarkup>
 
 public static class ReplyKeyboard
 {
-    public static IReplyMarkup Clear() =>
-        CreateKeyboard(
-            [
-                []
-            ]
-        );
+    public static IReplyMarkup Clear() => new ReplyKeyboardRemove();
 
     public static IReplyMarkup CreateKeyboard(KeyboardButton[][] buttons) =>
         new ReplyKeyboardMarkup { Keyboard = buttons };

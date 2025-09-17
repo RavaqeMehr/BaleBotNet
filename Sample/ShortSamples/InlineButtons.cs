@@ -7,7 +7,7 @@ public partial class ShortSamples
 {
     public async Task InlineButtons(long chatId)
     {
-        await bot.SendMessage(
+        var message = await bot.SendMessage(
             chatId: chatId,
             text: "test",
             replyMarkup: ReplyKeyboard.CreateInline(
@@ -34,5 +34,8 @@ public partial class ShortSamples
                 ]
             )
         );
+
+        await Task.Delay(3000);
+        await message.Edit(bot, "دکمه‌ها حذف شد", ReplyKeyboard.Clear());
     }
 }
