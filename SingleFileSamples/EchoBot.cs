@@ -5,7 +5,7 @@ using BaleBotNet;
 using BaleBotNet.Enums;
 using BaleBotNet.Methods;
 
-var bot = new BaleBotClient("bot-token");
+BaleBotClient bot = new("bot-token");
 int? offset = null;
 
 do
@@ -15,10 +15,10 @@ do
     var tasks = updates?
         .Where(update => update.Message?.Chat.Type == ChatType.Private)
         .Select(update => update.Message!)
-        .Select((message) => message.CopyTo(bot, message.Chat.Id))
+        .Select(message => message.CopyTo(bot, message.Chat.Id))
         .ToList();
 
-    if (tasks != null && tasks.Count > 0)
+    if (tasks?.Count > 0)
         await Task.WhenAll(tasks);
 
     if (updates?.Length > 0)
