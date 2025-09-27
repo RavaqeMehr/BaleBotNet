@@ -21,7 +21,7 @@ public static partial class Methods
             form.Add(new StringContent(replyId.ToString()), "reply_to_message_id");
         }
 
-        var mediaJson = BaleBotClient.SerializeToJson(metaDatas)!;
+        var mediaJson = Shared.SerializeToJson(metaDatas)!;
         form.Add(new StringContent(mediaJson), "media");
 
         return await bot.SendRequest<Message[]>(BotRequest.CreateForm("sendMediaGroup", form));
