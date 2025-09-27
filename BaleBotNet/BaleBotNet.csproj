@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>BaleBotNet</PackageId>
-    <Version>2.1.1</Version>
+    <Version>2.2.0</Version>
     <Authors>Moqavem</Authors>
     <Company>RavaqeMehr</Company>
     <Product>BaleBotNet</Product>
