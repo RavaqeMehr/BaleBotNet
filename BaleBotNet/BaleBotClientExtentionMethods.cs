@@ -19,11 +19,11 @@ public static class BaleBotClientExtentionMethods
             .AddSingleton(baleBotClient)
             .Configure<JsonOptions>(options =>
             {
-                options.SerializerOptions.PropertyNameCaseInsensitive = Shared
+                options.SerializerOptions.PropertyNameCaseInsensitive = BaleBotNetJsonTools
                     .jsonOption
                     .PropertyNameCaseInsensitive;
 
-                options.SerializerOptions.PropertyNamingPolicy = Shared
+                options.SerializerOptions.PropertyNamingPolicy = BaleBotNetJsonTools
                     .jsonOption
                     .PropertyNamingPolicy;
             });

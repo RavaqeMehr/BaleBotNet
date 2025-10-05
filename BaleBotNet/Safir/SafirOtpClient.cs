@@ -27,13 +27,13 @@ public class SafirOtpClient(string username, string password, int timeout = 10)
         var response = await httpClient.SendAsync(request);
         var responseString = await response.Content.ReadAsStringAsync();
 
-        T result = Shared.DeserializeFromJson<T>(responseString)!;
+        T result = BaleBotNetJsonTools.DeserializeFromJson<T>(responseString)!;
 
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception(
                 $"Error In {request.RequestUri}",
-                new(await Shared.GetRequestBodyForLog(request))
+                new(await BaleBotNetJsonTools.GetRequestBodyForLog(request))
             );
         }
 
@@ -68,7 +68,10 @@ public class SafirOtpClient(string username, string password, int timeout = 10)
             new(HttpMethod.Post, "send_otp")
             {
                 Headers = { Authorization = new AuthenticationHeaderValue("Bearer", token) },
-                Content = JsonContent.Create(new { phone, otp }, options: Shared.jsonOption)
+                Content = JsonContent.Create(
+                    new { phone, otp },
+                    options: BaleBotNetJsonTools.jsonOption
+                )
             }
         );
 }

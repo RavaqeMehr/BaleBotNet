@@ -25,7 +25,7 @@ public partial class BaleBotClient(string token, int timeout = 60)
     {
 #if DEBUG
         Console.WriteLine($"{GetReqeustMethodAndUriForLog(request, false)} : ----------------");
-        Console.WriteLine(await Shared.GetRequestBodyForLog(request));
+        Console.WriteLine(await BaleBotNetJsonTools.GetRequestBodyForLog(request));
 #endif
 
         var response = await httpClient.SendAsync(request);
@@ -33,20 +33,20 @@ public partial class BaleBotClient(string token, int timeout = 60)
 
 #if DEBUG
         Console.WriteLine(
-            $"Headers : {Shared.SerializeToJson(response.RequestMessage?.Headers.ToDictionary())}"
+            $"Headers : {BaleBotNetJsonTools.SerializeToJson(response.RequestMessage?.Headers.ToDictionary())}"
         );
         Console.WriteLine($"Response : ----------------");
         Console.WriteLine(responseString);
         Console.WriteLine("----------------");
 #endif
 
-        Response<T> result = Shared.DeserializeFromJson<Response<T>>(responseString)!;
+        Response<T> result = BaleBotNetJsonTools.DeserializeFromJson<Response<T>>(responseString)!;
 
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception(
                 $"Error In {GetReqeustMethodAndUriForLog(request, true)}: {result.Description} ({result.ErrorCode})",
-                new(await Shared.GetRequestBodyForLog(request))
+                new(await BaleBotNetJsonTools.GetRequestBodyForLog(request))
             );
         }
 

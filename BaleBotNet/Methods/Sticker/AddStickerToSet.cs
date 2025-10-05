@@ -17,7 +17,7 @@ public static partial class Methods
                 {
                     userId,
                     name,
-                    sticker = Shared.SerializeToJson(sticker)
+                    sticker = BaleBotNetJsonTools.SerializeToJson(sticker)
                 }
             )
         );

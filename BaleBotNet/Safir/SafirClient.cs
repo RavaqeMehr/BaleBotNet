@@ -24,13 +24,13 @@ public class SafirClient(string apiAccessKey, int timeout = 10)
         var response = await httpClient.SendAsync(request);
         var responseString = await response.Content.ReadAsStringAsync();
 
-        T result = Shared.DeserializeFromJson<T>(responseString)!;
+        T result = BaleBotNetJsonTools.DeserializeFromJson<T>(responseString)!;
 
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception(
                 $"Error In {request.RequestUri}",
-                new(await Shared.GetRequestBodyForLog(request))
+                new(await BaleBotNetJsonTools.GetRequestBodyForLog(request))
             );
         }
 

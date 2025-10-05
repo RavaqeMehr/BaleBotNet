@@ -19,7 +19,7 @@ public static partial class Methods
                     userId,
                     name = $"{name}_by_{bot.Me.Username}",
                     title,
-                    sticker = Shared.SerializeToJson(stickers)
+                    sticker = BaleBotNetJsonTools.SerializeToJson(stickers)
                 }
             )
         );

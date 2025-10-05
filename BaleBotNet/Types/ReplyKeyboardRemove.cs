@@ -4,5 +4,5 @@ public class ReplyKeyboardRemove : IReplyMarkup
 {
     public bool RemoveKeyboard { get; set; } = true;
 
-    public override string ToString() => Shared.SerializeToJson(this)!;
+    public override string ToString() => BaleBotNetJsonTools.SerializeToJson(this)!;
 }

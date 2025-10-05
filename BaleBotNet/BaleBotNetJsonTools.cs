@@ -5,7 +5,7 @@ using System.Text.Unicode;
 
 namespace BaleBotNet;
 
-public static class Shared
+public static class BaleBotNetJsonTools
 {
     public static readonly JsonSerializerOptions jsonOption =
         new(JsonSerializerOptions.Default)
@@ -38,7 +38,7 @@ public static class Shared
         return JsonSerializer.Deserialize<T>(json, jsonOption);
     }
 
-    public static async Task<string> GetRequestBodyForLog(HttpRequestMessage request)
+    internal static async Task<string> GetRequestBodyForLog(HttpRequestMessage request)
     {
         return request.Content != null
             ? await request.Content.ReadAsStringAsync()
