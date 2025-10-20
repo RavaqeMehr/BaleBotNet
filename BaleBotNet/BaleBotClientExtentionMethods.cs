@@ -1,7 +1,7 @@
 using BaleBotNet.Methods;
 using BaleBotNet.Types;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http.Json;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BaleBotNet;
@@ -14,19 +14,8 @@ public static class BaleBotClientExtentionMethods
         int timeout = 60
     )
     {
-        BaleBotClient baleBotClient = new BaleBotClient(token, timeout);
-        services
-            .AddSingleton(baleBotClient)
-            .Configure<JsonOptions>(options =>
-            {
-                options.SerializerOptions.PropertyNameCaseInsensitive = BaleBotNetJsonTools
-                    .jsonOption
-                    .PropertyNameCaseInsensitive;
-
-                options.SerializerOptions.PropertyNamingPolicy = BaleBotNetJsonTools
-                    .jsonOption
-                    .PropertyNamingPolicy;
-            });
+        BaleBotClient baleBotClient = new(token, timeout);
+        services.AddSingleton(baleBotClient);
 
         return baleBotClient;
     }
@@ -61,8 +50,10 @@ public static class BaleBotClientExtentionMethods
 
         app.MapPost(
             webhookPath,
-            async (Update update) =>
+            async (HttpRequest request) =>
             {
+                Update update = await GetUpdateFromHttpRequest(request);
+
                 switch (update)
                 {
                     case { Message: { } message }:
@@ -98,7 +89,15 @@ public static class BaleBotClientExtentionMethods
     {
         var webhookPath = SetWebhook(app, appBaseUrl, webhookPrefix);
 
-        app.MapPost(webhookPath, async (Update update) => await handleUpdate(update));
+        app.MapPost(
+            webhookPath,
+            async (HttpRequest request) =>
+            {
+                Update update = await GetUpdateFromHttpRequest(request);
+
+                await handleUpdate(update);
+            }
+        );
 
         return app;
     }
@@ -113,8 +112,12 @@ public static class BaleBotClientExtentionMethods
 
         app.MapPost(
             webhookPath,
-            async (IUpdateHandler updateHandler, Update update) =>
-                await updateHandler.HandleUpdate(update)
+            async (IUpdateHandler updateHandler, HttpRequest request) =>
+            {
+                Update update = await GetUpdateFromHttpRequest(request);
+
+                await updateHandler.HandleUpdate(update);
+            }
         );
 
         return app;
@@ -130,8 +133,10 @@ public static class BaleBotClientExtentionMethods
 
         app.MapPost(
             webhookPath,
-            async Task (IServiceScopeFactory serviceScopeFactory, Update update) =>
+            async Task (IServiceScopeFactory serviceScopeFactory, HttpRequest request) =>
             {
+                Update update = await GetUpdateFromHttpRequest(request);
+
                 var updateId = update.UpdateId;
                 using var scope = serviceScopeFactory.CreateScope();
                 var updateTask = update switch
@@ -161,4 +166,7 @@ public static class BaleBotClientExtentionMethods
 
         return app;
     }
+
+    public static async Task<Update> GetUpdateFromHttpRequest(HttpRequest request) =>
+        (await request.ReadFromJsonAsync<Update>(BaleBotNetJsonTools.jsonOption))!;
 }
