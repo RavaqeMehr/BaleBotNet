@@ -4,6 +4,7 @@ public class Message
 {
     public long MessageId { get; set; }
     public User? From { get; set; }
+    public Chat? SenderChat { get; set; } // used in channel updates
     public int Date { get; set; }
     public Chat Chat { get; set; } = null!;
     public User? ForwardFrom { get; set; }
