@@ -137,7 +137,8 @@ ShortSamples samples = new(bot);
 // await samples.SendInvoice(env.TestChatId);
 // await samples.InquireTransaction("");
 
-await samples.SendChatAction(env.TestChatId);
+await samples.EditKeyboard(env.TestChatId);
+// await samples.SendChatAction(env.TestChatId);
 // await samples.RequestContact(env.TestChatId);
 // await samples.InlineButtons(env.TestChatId);
 // await samples.KeyboardButtons(env.TestChatId);
