@@ -134,7 +134,8 @@ var app = builder.Build();
 
 ShortSamples samples = new(bot);
 
-await samples.AskReview(env.TestChatId);
+await samples.GetChatMember(env.TestChatId);
+// await samples.AskReview(env.TestChatId);
 
 
 // await samples.SendInvoice(env.TestChatId);
