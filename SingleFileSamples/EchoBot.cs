@@ -1,5 +1,5 @@
 #:property PublishAot=false
-#:package BaleBotNet@2.1.1
+#:package BaleBotNet@4.2.0
 
 using BaleBotNet;
 using BaleBotNet.Enums;
